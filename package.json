@@ -1,8 +1,8 @@
 {
-  "name": "cordova-plugin-template",
+  "name": "cordova-plugin-dfu",
   "version": "1.0.0",
   "cordova": {
-    "id": "cordova-plugin-template",
+    "id": "cordova-plugin-dfu",
     "platforms": [
       "android",
       "ios"
