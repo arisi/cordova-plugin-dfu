@@ -23,7 +23,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     Log.e("ARI4", "Initializing cordovaPluginDfu");
-    usb = new Usb(this);
+    usb = new Usb(this.cordova.getActivity().getApplicationContext());
     Log.e("ARI4", "Initializing cordovaPluginDfu:::"+usb);
   }
 
@@ -37,7 +37,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
       Log.e("ARI","oujee");
       callbackContext.sendPluginResult(result);
-      usb = new Usb(this);
+      usb = new Usb(this.cordova.getActivity().getApplicationContext());
       Log.e("ARI44", "Initializing cordovaPluginDfu:::"+usb);
     }
     return true;
