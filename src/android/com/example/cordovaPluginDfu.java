@@ -32,6 +32,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 
     super.initialize(cordova, webView);
+    this.callbackContext = null;
     Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this.cordova.getActivity().getApplicationContext());
     usb.setUsbManager((UsbManager) this.cordova.getActivity().getApplicationContext().getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
@@ -49,11 +50,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","erase");
         dfu.massErase();
         Log.e("ARIM","erased?");
-        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "WHAT");
-        pluginResult.setKeepCallback(true);
-        Log.e("ARIM","cb?");
-        callbackContext.sendPluginResult(pluginResult);
-        Log.e("ARIM","cb ok");
+        if (this.callbackContext != null) {
+          PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "WHAT");
+          pluginResult.setKeepCallback(true);
+          Log.e("ARIM","cb?");
+          this.callbackContext.sendPluginResult(pluginResult);
+          Log.e("ARIM","cb ok");
+        }
       }
     });
 
@@ -74,14 +77,15 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-    this.callbackContext = callbackContext;
     if(action.equals("echo")) {
       String phrase = args.getString(0);
       // Echo back the first argument
       Log.d(TAG, phrase);
     } else if(action.equals("getDate")) {
+      this.callbackContext = callbackContext;
       // An example of returning data back to the web layer
       final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
+      result.setKeepCallback(true);
       Log.e("ARI","oujee");
       callbackContext.sendPluginResult(result);
     }
