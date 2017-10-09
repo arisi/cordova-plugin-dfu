@@ -26,13 +26,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
   private Usb usb;
   private Dfu dfu;
-  private CallbackContext callbackContext;
+  private CallbackContext cbc;
 
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 
     super.initialize(cordova, webView);
-    this.callbackContext = null;
+    cbc = null;
     Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this.cordova.getActivity().getApplicationContext());
     usb.setUsbManager((UsbManager) this.cordova.getActivity().getApplicationContext().getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
@@ -50,11 +50,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","erase");
         dfu.massErase();
         Log.e("ARIM","erased?");
-        if (this.callbackContext != null) {
+        if (cbc != null) {
           PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "WHAT");
           pluginResult.setKeepCallback(true);
           Log.e("ARIM","cb?");
-          this.callbackContext.sendPluginResult(pluginResult);
+          cbc.sendPluginResult(pluginResult);
           Log.e("ARIM","cb ok");
         }
       }
@@ -82,12 +82,12 @@ public class cordovaPluginDfu extends CordovaPlugin {
       // Echo back the first argument
       Log.d(TAG, phrase);
     } else if(action.equals("getDate")) {
-      this.callbackContext = callbackContext;
+      cbc = callbackContext;
       // An example of returning data back to the web layer
       final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
       result.setKeepCallback(true);
       Log.e("ARI","oujee");
-      callbackContext.sendPluginResult(result);
+      cbc.sendPluginResult(result);
     }
     return true;
   }
