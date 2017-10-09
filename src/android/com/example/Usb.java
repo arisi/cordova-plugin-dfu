@@ -31,7 +31,7 @@ import java.util.Iterator;
 
 public class Usb {
 
-    final static String TAG = "Umbrela Client: USB";
+    final static String TAG = "ARI2";
 
     private Context mContext;
 
