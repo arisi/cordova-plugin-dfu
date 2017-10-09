@@ -11,6 +11,9 @@ import org.apache.cordova.PluginResult.Status;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.hardware.usb.UsbManager;
 
 import android.util.Log;
 
@@ -24,7 +27,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     super.initialize(cordova, webView);
     Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this.cordova.getActivity().getApplicationContext());
-    Log.e("ARI4", "Initializing cordovaPluginDfu:::"+usb);
+    Log.e("ARI4", "Initialized usb: "+usb);
   }
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -37,8 +40,6 @@ public class cordovaPluginDfu extends CordovaPlugin {
       final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
       Log.e("ARI","oujee");
       callbackContext.sendPluginResult(result);
-      usb = new Usb(this.cordova.getActivity().getApplicationContext());
-      Log.e("ARI44", "Initializing cordovaPluginDfu:::"+usb);
     }
     return true;
   }

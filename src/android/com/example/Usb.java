@@ -71,6 +71,7 @@ public class Usb {
             if (ACTION_USB_PERMISSION.equals(action)) {
                 synchronized (this) {
                     UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                    Log.e(TAG, "fiund? device " + device);
 
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         if (device != null) {
@@ -83,16 +84,19 @@ public class Usb {
                             }
                         }
                     } else {
-                        Log.d(TAG, "permission denied for device " + device);
+                        Log.e(TAG, "permission denied for device " + device);
                     }
                 }
             } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
                 synchronized (this) {
+                    Log.e(TAG, "attached ");
+
                     //request permission for just attached USB Device if it matches the VID/PID
                     requestPermission(mContext, USB_VENDOR_ID, USB_PRODUCT_ID);
                 }
             } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
                 synchronized (this) {
+                    Log.e(TAG, "detached ");
                     UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                     if (mDevice != null && mDevice.equals(device)) {
                         release();
