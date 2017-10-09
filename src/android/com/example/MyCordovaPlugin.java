@@ -33,7 +33,7 @@ public class MyCordovaPlugin extends CordovaPlugin {
     } else if(action.equals("getDate")) {
       // An example of returning data back to the web layer
       final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
-      Log.e("ARI","oujee")
+      Log.e("ARI","oujee");
       callbackContext.sendPluginResult(result);
     }
     return true;
