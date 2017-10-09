@@ -45,10 +45,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
         final String deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
         Log.e("ARIM","connected "+deviceInfo);
         //status.setText(deviceInfo);
-        //dfu.setUsb(usb);
+        dfu.setUsb(usb);
+        dfu.massErase();
       }
     });
-    
+
     dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
     Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;

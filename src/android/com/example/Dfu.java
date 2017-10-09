@@ -31,7 +31,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Dfu {
-    private static final String TAG = "Dfu";
+    private static final String TAG = "ARIDFU";
     private final static int USB_DIR_OUT = 0;
     private final static int USB_DIR_IN = 128;       //0x80
     private final static int DFU_RequestType = 0x21;  // '2' => Class request ; '1' => to interface
@@ -145,7 +145,7 @@ public class Dfu {
             if (i == 1) {
                 throw new Exception("Cannot Mass Erase, REPLACE UNIT!");
             }
-            Log.e(TAG, "Device not blank, erasing");
+            Log.e("ARIXX", "Device not blank, erasing");
             massErase();
         }
         writeImage();
