@@ -26,7 +26,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
   private Usb usb;
   private Dfu dfu;
-
+  private CallbackContext callbackContext;
 
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -49,6 +49,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","erase");
         dfu.massErase();
         Log.e("ARIM","erased?");
+        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "WHAT");
+        pluginResult.setKeepCallback(true);
+        if (callbackContext) {
+          Log.e("ARIM","cb?");
+          callbackContext.sendPluginResult(pluginResult);
+          Log.e("ARIM","cb ok");
+        }
       }
     });
 
@@ -69,6 +76,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+    this.callbackContext = callbackContext;
     if(action.equals("echo")) {
       String phrase = args.getString(0);
       // Echo back the first argument
