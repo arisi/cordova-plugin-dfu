@@ -15,6 +15,8 @@ import org.json.JSONException;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
+import android.os.Handler;
+import android.os.Message;
 
 import android.util.Log;
 
