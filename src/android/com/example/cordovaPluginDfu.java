@@ -10,7 +10,7 @@ import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import org.json.JSONException;
+import org.json.JSONException; 
 
 import android.util.Log;
 
