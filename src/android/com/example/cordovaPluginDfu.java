@@ -11,6 +11,7 @@ import org.apache.cordova.PluginResult.Status;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.content.Context;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
@@ -28,9 +29,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
     Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this.cordova.getActivity().getApplicationContext());
     Log.e("ARI4", "Initialized usb: "+usb);
-    registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
-    registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
-    registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
+    this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
+    this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
+    this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
 
 
     // Handle case where USB device is connected before app launches;
