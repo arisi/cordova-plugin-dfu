@@ -11,5 +11,5 @@ var MyCordovaPlugin = {
     exec(cb, null, PLUGIN_NAME, 'getDate', []);
   }
 };
-
+console.log("plogin loadad")
 module.exports = MyCordovaPlugin;
