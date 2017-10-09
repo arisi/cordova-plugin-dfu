@@ -28,7 +28,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     super.initialize(cordova, webView);
     Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this.cordova.getActivity().getApplicationContext());
-    usb.setUsbManager((UsbManager) getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
+    usb.setUsbManager((UsbManager) this.cordova.getActivity().getApplicationContext().getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
     Log.e("ARI4", "Initialized usb: "+usb);
     //this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
