@@ -195,8 +195,8 @@ public class Dfu {
 
         DfuStatus dfuStatus = new DfuStatus();
         long startTime = System.currentTimeMillis();  // note current time
-        Log.e("DFU","erasin");
-        onStatusMsg("erasin\n");
+        Log.e(TAG,"erasin");
+        //onStatusMsg("erasin\n");
         try {
             do {
                 clearStatus();
@@ -205,7 +205,7 @@ public class Dfu {
 
             if (isDeviceProtected()) {
                 removeReadProtection();
-                onStatusMsg("Read Protection removed. Device resets...Wait until it   re-enumerates "); // XXX This will reset the device
+                Log.e(TAG,"Read Protection removed. Device resets...Wait until it   re-enumerates "); // XXX This will reset the device
                 return;
             }
 
@@ -218,7 +218,7 @@ public class Dfu {
                 clearStatus();
                 getStatus(dfuStatus);
             } while (dfuStatus.bState != STATE_DFU_IDLE);
-            onStatusMsg("Mass erase completed in " + (System.currentTimeMillis() - startTime) + " ms yee");
+            Log.e(TAG,"Mass erase completed in " + (System.currentTimeMillis() - startTime) + " ms yee");
 
         } catch (InterruptedException e) {
             e.printStackTrace();

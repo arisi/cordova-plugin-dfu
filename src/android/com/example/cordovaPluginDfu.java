@@ -46,7 +46,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","connected "+deviceInfo);
         //status.setText(deviceInfo);
         dfu.setUsb(usb);
+        Log.e("ARIM","erase");
         dfu.massErase();
+        Log.e("ARIM","erased?");
       }
     });
 
