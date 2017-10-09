@@ -1,4 +1,4 @@
-Cordova Plugin Template
+Cordova Plugin Dfu
 ======
 
-This is a simple starting point for building a Cordova plugin on iOS and Android.
+This is a simple DFU plugin :)
