@@ -22,8 +22,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
-    Log.d(TAG, "Initializing cordovaPluginDfu");
+    Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this);
+    Log.e("ARI4", "Initializing cordovaPluginDfu:::"+usb);
   }
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -36,6 +37,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
       Log.e("ARI","oujee");
       callbackContext.sendPluginResult(result);
+      usb = new Usb(this);
+      Log.e("ARI44", "Initializing cordovaPluginDfu:::"+usb);
     }
     return true;
   }
