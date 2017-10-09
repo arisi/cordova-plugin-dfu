@@ -19,11 +19,11 @@ import java.util.Date;
 public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
   private Usb usb;
-  
+
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
-
     Log.d(TAG, "Initializing cordovaPluginDfu");
+    usb = new Usb(this);
   }
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
