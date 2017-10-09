@@ -139,7 +139,7 @@ public class Usb {
     private UsbDevice getUsbDevice(int vendorId, int productId) {
         Log.e("ARI8","getdevicelist...");
         HashMap<String, UsbDevice> deviceList = mUsbManager.getDeviceList();
-        Log.e("ARI8","getdevicelist: "+devicelist);
+        Log.e("ARI8","getdevicelist: "+deviceList);
         Iterator<UsbDevice> deviceIterator = deviceList.values().iterator();
 
         UsbDevice device;
