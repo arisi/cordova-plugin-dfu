@@ -49,13 +49,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
     //usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
   }
 
-  @Override
-  public boolean handleMessage(Message message) {
-    Log.e("ARIM","messu? "+message);
-    return false;
-  }
+  //@Override
+  //public boolean handleMessage(Message message) {
+  //  Log.e("ARIM","messu? "+message);
+  //  return false;
+  //}
 
-  @Override
+  //@Override
   public void onUsbConnected() {
     final String deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
     Log.e("ARIM","connected "+deviceInfo);
