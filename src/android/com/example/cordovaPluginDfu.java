@@ -56,6 +56,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
           Log.e("ARIM","cb?");
           cbc.sendPluginResult(pluginResult);
           Log.e("ARIM","cb ok");
+        } else {
+          Log.e("ARIM","NO CBC");
+
         }
       }
     });
@@ -84,7 +87,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     } else if(action.equals("getDate")) {
       cbc = callbackContext;
       // An example of returning data back to the web layer
-      final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
+      PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
       result.setKeepCallback(true);
       Log.e("ARI","oujee");
       cbc.sendPluginResult(result);
