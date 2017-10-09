@@ -4,8 +4,7 @@
   "cordova": {
     "id": "cordova-plugin-dfu",
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   },
   "description": "cordovaPluginDfu :)"
