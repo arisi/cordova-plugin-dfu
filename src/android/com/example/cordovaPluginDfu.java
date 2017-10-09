@@ -44,14 +44,14 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
   @Override
   public boolean handleMessage(Message message) {
-    Log.e("ARIM","messu? "+message)
+    Log.e("ARIM","messu? "+message);
     return false;
   }
 
   @Override
   public void onUsbConnected() {
     final String deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
-    Log.e("ARIM","connected "+deviceInfo)
+    Log.e("ARIM","connected "+deviceInfo);
     //status.setText(deviceInfo);
     dfu.setUsb(usb);
   }
