@@ -40,8 +40,15 @@ public class cordovaPluginDfu extends CordovaPlugin {
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
 
-    usb.setOnUsbChangeListener((Usb.OnUsbChangeListener) this.cordova.getActivity().getApplicationContext());
-
+    usb.setOnUsbChangeListener(new Usb.OnUsbChangeListener() {
+      public void onUsbConnected() {
+        final String deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
+        Log.e("ARIM","connected "+deviceInfo);
+        //status.setText(deviceInfo);
+        //dfu.setUsb(usb);
+      }
+    });
+    
     dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
     Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
@@ -56,12 +63,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   //}
 
   //@Override
-  public void onUsbConnected() {
-    final String deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
-    Log.e("ARIM","connected "+deviceInfo);
-    //status.setText(deviceInfo);
-    dfu.setUsb(usb);
-  }
+
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if(action.equals("echo")) {
