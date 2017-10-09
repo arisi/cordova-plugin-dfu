@@ -180,7 +180,7 @@ public class Usb {
                 mDeviceVersion = rawDescriptor[13] << 8;
                 mDeviceVersion |= rawDescriptor[12];
 
-                Log.i("USB", getDeviceInfo(device));
+                Log.i("ARI", getDeviceInfo(device));
             } else {
                 Log.e("ARI", "open FAIL");
                 mConnection = null;

@@ -1,4 +1,4 @@
-/**
+  /**
  */
 package com.example;
 
@@ -23,6 +23,7 @@ import java.util.Date;
 public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
   private Usb usb;
+  private Dfu dfu;
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
@@ -34,7 +35,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
 
-
+    dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
+    Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
     // hence ACTION_USB_DEVICE_ATTACHED will not occur so we explicitly call for permission
     //usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);

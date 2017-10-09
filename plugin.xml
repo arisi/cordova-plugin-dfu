@@ -27,6 +27,7 @@
 
       <source-file src="src/android/com/example/cordovaPluginDfu.java" target-dir="src/com/example/" />
       <source-file src="src/android/com/example/Usb.java" target-dir="src/com/example/" />
+      <source-file src="src/android/com/example/Dfu.java" target-dir="src/com/example/" />
     </platform>
 
 </plugin>
