@@ -89,7 +89,7 @@ public class Dfu {
     private Usb usb;
     private int deviceVersion;  //STM bootloader version
 
-    private final List<DfuListener> listeners = new ArrayList<>();
+    private final List<DfuListener> listeners = new ArrayList<DfuListener>();
 
     public interface DfuListener {
         void onStatusMsg(String msg);
