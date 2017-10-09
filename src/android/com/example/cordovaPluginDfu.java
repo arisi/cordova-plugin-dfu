@@ -51,11 +51,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","erased?");
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "WHAT");
         pluginResult.setKeepCallback(true);
-        if (callbackContext) {
-          Log.e("ARIM","cb?");
-          callbackContext.sendPluginResult(pluginResult);
-          Log.e("ARIM","cb ok");
-        }
+        Log.e("ARIM","cb?");
+        callbackContext.sendPluginResult(pluginResult);
+        Log.e("ARIM","cb ok");
       }
     });
 
