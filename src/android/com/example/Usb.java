@@ -124,9 +124,9 @@ public class Usb {
         // Setup Pending Intent
         Log.e("ARI9","reqPerm");
         PendingIntent permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(Usb.ACTION_USB_PERMISSION), 0);
-        Log.e("ARI9","reqPerm2"+permissionIntent);
+        Log.e("ARI9","reqPerm2: "+permissionIntent);
         UsbDevice device = getUsbDevice(vendorId, productId);
-        Log.e("ARI9","reqPerm3"+device);
+        Log.e("ARI9","reqPerm3: "+device);
 
         if (device != null) {
             Log.e("ARI9","reqPerm4");
@@ -137,7 +137,9 @@ public class Usb {
     }
 
     private UsbDevice getUsbDevice(int vendorId, int productId) {
+        Log.e("ARI8","getdevicelist...")
         HashMap<String, UsbDevice> deviceList = mUsbManager.getDeviceList();
+        Log.e("ARI8","getdevicelist: "+devicelist)
         Iterator<UsbDevice> deviceIterator = deviceList.values().iterator();
 
         UsbDevice device;
