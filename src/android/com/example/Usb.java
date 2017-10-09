@@ -108,6 +108,7 @@ public class Usb {
 
     public Usb(Context context) {
         mContext = context;
+        Log.e("ARI3","ouheee");
     }
 
     public void setUsbManager(UsbManager usbManager) {

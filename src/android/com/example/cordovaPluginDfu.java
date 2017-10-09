@@ -10,7 +10,7 @@ import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import org.json.JSONException; 
+import org.json.JSONException;
 
 import android.util.Log;
 
@@ -18,7 +18,8 @@ import java.util.Date;
 
 public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
-
+  private Usb usb;
+  
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
 
