@@ -27,20 +27,31 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Usb usb;
   private Dfu dfu;
 
+  @Override
+  protected void onStart() {
+      super.onStart();
+
+      /* Setup USB */
+      usb = new Usb(this.cordova.getActivity().getApplicationContext());
+      usb.setUsbManager((UsbManager) this.cordova.getActivity().getApplicationContext().getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
+      Log.e("ARI4", "Initialized usb: "+usb);
+
+      usb.setOnUsbChangeListener(this);
+      
+      this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
+      this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
+      this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
+      usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
+
+      dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
+      Log.e("ARIX","dfu done :)");
+
+    }
+
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     Log.e("ARI4", "Initializing cordovaPluginDfu");
-    usb = new Usb(this.cordova.getActivity().getApplicationContext());
-    usb.setUsbManager((UsbManager) this.cordova.getActivity().getApplicationContext().getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
-    Log.e("ARI4", "Initialized usb: "+usb);
-    this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
-    this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
-    this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
 
-    usb.setOnUsbChangeListener(this);
-
-    dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
-    Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
     // hence ACTION_USB_DEVICE_ATTACHED will not occur so we explicitly call for permission
     //usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
