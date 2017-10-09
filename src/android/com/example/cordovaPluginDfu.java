@@ -36,7 +36,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED));
-    usb.setOnUsbChangeListener(this.cordova.getActivity().getApplicationContext());
+
+    usb.setOnUsbChangeListener(this);
+
     dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
     Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
