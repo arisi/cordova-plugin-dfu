@@ -68,7 +68,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
     // hence ACTION_USB_DEVICE_ATTACHED will not occur so we explicitly call for permission
-    //usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
+    usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
   }
 
   //@Override
@@ -101,6 +101,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARI","readBytes. read?? ");
         for (int i=0;i<ret.length;i++)
           json.put("byte"+i, ret[i]);
+        json.put("bytes",new JSONArray(new String(ret)))
       } catch (Exception e) {
         Log.e("ARI","dah");
         return true;
