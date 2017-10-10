@@ -28,15 +28,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Dfu dfu;
   private CallbackContext cbc;
 
-  private send2JS(String msg) {
+  private boolean send2JS(String msg) {
     if (cbc != null) {
       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, msg);
       pluginResult.setKeepCallback(true);
       Log.e("ARIMx","cb?");
       cbc.sendPluginResult(pluginResult);
       Log.e("ARIMx","cb ok");
+      return true;
     } else {
       Log.e("ARIMx","NO CBC");
+      return false;
     }
   }
 
