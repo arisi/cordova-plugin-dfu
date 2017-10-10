@@ -463,18 +463,20 @@ public class Dfu {
       byte[] block = new byte[32];
       if (!isUsbConnected()) return block;
       DfuStatus dfuStatus = new DfuStatus();
-
+      Log.e("ARIR","read "+startAddress+","+bytes);
       try {
         do {
             clearStatus();
             getStatus(dfuStatus);
         } while (dfuStatus.bState != STATE_DFU_IDLE);
+        Log.e("ARIR","addrp?");
 
         setAddressPointer(startAddress);
         getStatus(dfuStatus);   // to execute
         getStatus(dfuStatus);   //to verify
         if (dfuStatus.bState == STATE_DFU_ERROR) {
-            throw new Exception("Start address not supported");
+          Log.e("ARIR","read ERRS");
+          throw new Exception("Start address not supported");
         }
 
         while (dfuStatus.bState != STATE_DFU_IDLE) {        // todo if fails, maybe stop reading
@@ -482,6 +484,7 @@ public class Dfu {
             getStatus(dfuStatus);
         }
         upload(block, bytes, 2);
+        Log.e("ARIR","read ok?");
         getStatus(dfuStatus);
         return block;
       } catch (Exception e) {
