@@ -90,11 +90,16 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
     } else if (action.equals("readBytes")) {
       byte[] ret= new byte[100];
+      Log.e("ARI","readBytes,. "+args);
       //Arrays.fill( ret, (byte) 1 );
       try {
         int start=Integer.parseInt(args.getString(0));
+        Log.e("ARI","readBytes. start= "+start);
         int bytes=Integer.parseInt(args.getString(1));
+        Log.e("ARI","readBytes. start= "+bytes);
         ret=dfu.readBytes( start,bytes ) ;
+        Log.e("ARI","readBytes. read?? ");
+
       } catch (Exception e) {
         Log.e("ARI","dah");
         return true;
