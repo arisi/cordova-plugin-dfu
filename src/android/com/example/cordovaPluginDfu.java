@@ -89,23 +89,21 @@ public class cordovaPluginDfu extends CordovaPlugin {
       callbackContext.sendPluginResult(result);
 
     } else if (action.equals("readBytes")) {
-      byte[] ret= new byte[100];
       Log.e("ARI","readBytes,. "+args);
+      JSONObject json = new JSONObject();
       //Arrays.fill( ret, (byte) 1 );
       try {
         int start=Integer.parseInt(args.getString(0));
         Log.e("ARI","readBytes. start= "+start);
         int bytes=Integer.parseInt(args.getString(1));
         Log.e("ARI","readBytes. start= "+bytes);
-        ret=dfu.readBytes( start,bytes ) ;
+        ret byte[] = dfu.readBytes( start,bytes ) ;
         Log.e("ARI","readBytes. read?? ");
-
+        json.put("bytes", ret);
       } catch (Exception e) {
         Log.e("ARI","dah");
         return true;
       }
-      JSONObject json = new JSONObject();
-      json.put("bytes", ret);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
     } else if(action.equals("registerReceiver")) {
