@@ -192,37 +192,19 @@ public class Usb {
         return (mConnection != null);
     }
 
-    public String getDeviceInfo(UsbDevice device) {
+    public JSONObject getDeviceInfo(UsbDevice device) {
+        JSONObject json = new JSONObject();
         if (device == null)
-            return "No device found.";
+            return json;
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Model: " + device.getDeviceName() + "\n");
-        sb.append("ID: " + device.getDeviceId() + " (0x" + Integer.toHexString(device.getDeviceId()) + ")" + "\n");
-        sb.append("Class: " + device.getDeviceClass() + "\n");
-        sb.append("Subclass: " + device.getDeviceSubclass() + "\n");
-        sb.append("Protocol: " + device.getDeviceProtocol() + "\n");
-        sb.append("Vendor ID " + device.getVendorId() + " (0x" + Integer.toHexString(device.getVendorId()) + ")" + "\n");
-        sb.append("Product ID: " + device.getProductId() + " (0x" + Integer.toHexString(device.getProductId()) + ")" + "\n");
-        sb.append("Device Ver: 0x" + Integer.toHexString(mDeviceVersion) + "\n");
-        sb.append("Interface count: " + device.getInterfaceCount() + "\n");
-
-        for (int i = 0; i < device.getInterfaceCount(); i++) {
-
-            UsbInterface usbInterface = device.getInterface(i);
-
-            sb.append("Interface: " + usbInterface.toString() + "\n");
-            sb.append("Endpoint Count: " + usbInterface.getEndpointCount() + "\n");
-
-            for (int j = 0; j < usbInterface.getEndpointCount(); j++) {
-
-                UsbEndpoint ep = usbInterface.getEndpoint(j);
-
-                sb.append("Endpoint: " + ep.toString() + "\n");
-            }
-        }
-
-        return sb.toString();
+        json.put("model", device.getDeviceName());
+        json.put("id", device.getDeviceId() + " (0x" + Integer.toHexString(device.getDeviceId()) + ")");
+        json.put("class", device.getDeviceClass());
+        json.put("subclass", device.getDeviceSubclass());
+        json.put("vendor", device.getVendorId() + " (0x" + Integer.toHexString(device.getVendorId()) + ")");
+        json.put("product", device.getProductId() + " (0x" + Integer.toHexString(device.getProductId()) + ")");
+        json.put("version", Integer.toHexString(mDeviceVersion));
+        return json
     }
 
     public int getDeviceVersion() {
