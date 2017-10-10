@@ -28,7 +28,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Dfu dfu;
   private CallbackContext cbc;
 
-  private send2JS(msg) {
+  private send2JS(String msg) {
     if (cbc != null) {
       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, msg);
       pluginResult.setKeepCallback(true);
