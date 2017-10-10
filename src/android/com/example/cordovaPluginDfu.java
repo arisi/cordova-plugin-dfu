@@ -99,7 +99,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARI","readBytes. start= "+bytes);
         byte[] ret = dfu.readBytes( start,bytes ) ;
         Log.e("ARI","readBytes. read?? ");
-        json.put("bytes", ret);
+        for (int i=0;i<ret.length;i++) 
+          json.put("byte"+i, b);
       } catch (Exception e) {
         Log.e("ARI","dah");
         return true;
