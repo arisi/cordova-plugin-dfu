@@ -189,7 +189,7 @@ public class Dfu {
         return result;
     }
 
-    public void massErase() {
+    public int massErase() {
 
         if (!isUsbConnected()) return;
 
@@ -219,12 +219,14 @@ public class Dfu {
                 getStatus(dfuStatus);
             } while (dfuStatus.bState != STATE_DFU_IDLE);
             Log.e(TAG,"Mass erase completed in " + (System.currentTimeMillis() - startTime) + " ms yee");
+            return System.currentTimeMillis() - startTime;
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (Exception e) {
             onStatusMsg(e.toString());
         }
+        return -1;
     }
 
     public void fastOperations() {

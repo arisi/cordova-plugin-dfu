@@ -4,8 +4,8 @@ var exec = require('cordova/exec');
 var PLUGIN_NAME = 'cordovaPluginDfu';
 
 var cordovaPluginDfu = {
-  echo: function(phrase, cb) {
-    exec(cb, null, PLUGIN_NAME, 'echo', [phrase]);
+  massErase: function(cb) {
+    exec(cb, null, PLUGIN_NAME, 'massErase', []);
   },
   registerReceiver: function(act,cb) {
     exec(cb, null, PLUGIN_NAME, 'registerReceiver', [act]);

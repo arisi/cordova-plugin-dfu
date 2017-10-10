@@ -60,9 +60,6 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","connected "+deviceInfo);
         //status.setText(deviceInfo);
         dfu.setUsb(usb);
-        Log.e("ARIM","erase");
-        dfu.massErase();
-        Log.e("ARIM","erased?");
         send2JS("got device");
       }
     });
@@ -84,16 +81,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-    if(action.equals("echo")) {
-      String phrase = args.getString(0);
-      // Echo back the first argument
+    if(action.equals("massErase")) {
+      Log.e("ARIM","erase");
+      int ret=dfu.massErase();
+      Log.e("ARIM","erased?");
+      final PluginResult result = new PluginResult(PluginResult.Status.OK, "erased: "+ret);
+      callbackContext.sendPluginResult(result);
       Log.d(TAG, phrase);
     } else if(action.equals("registerReceiver")) {
-      cbc = callbackContext;
-      PluginResult result = new PluginResult(PluginResult.Status.OK, "aktivoitu");
-      result.setKeepCallback(true);
       Log.e("ARI","registerReceiver: "+args);
-      cbc.sendPluginResult(result);
+      cbc = callbackContext;
+      send2JS("aktivoitu");
     }
     return true;
   }
