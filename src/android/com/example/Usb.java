@@ -29,6 +29,10 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class Usb {
 
     final static String TAG = "ARI2";
