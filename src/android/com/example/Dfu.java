@@ -482,7 +482,7 @@ public class Dfu {
         byte[] block = new byte[32];
         upload(block, bytes, 2);
         getStatus(dfuStatus);
-        return block
+        return block;
       } catch (Exception e) {
           e.printStackTrace();
       }
