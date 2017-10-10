@@ -21,7 +21,7 @@ import android.os.Message;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Date;
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 
 public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
