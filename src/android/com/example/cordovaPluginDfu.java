@@ -19,7 +19,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import android.util.Log;
-
+import java.util.Arrays;
 import java.util.Date;
 
 public class cordovaPluginDfu extends CordovaPlugin {
