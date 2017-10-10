@@ -7,9 +7,9 @@ var cordovaPluginDfu = {
   echo: function(phrase, cb) {
     exec(cb, null, PLUGIN_NAME, 'echo', [phrase]);
   },
-  getDate: function(cb) {
-    exec(cb, null, PLUGIN_NAME, 'getDate', []);
+  registerReceiver: function(act,cb) {
+    exec(cb, null, PLUGIN_NAME, 'registerReceiver', [act]);
   }
 };
-console.log("plogin loadad")
+console.log("cordovaPluginDfu loadad :)")
 module.exports = cordovaPluginDfu;

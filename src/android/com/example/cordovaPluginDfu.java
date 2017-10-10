@@ -84,12 +84,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
       String phrase = args.getString(0);
       // Echo back the first argument
       Log.d(TAG, phrase);
-    } else if(action.equals("getDate")) {
+    } else if(action.equals("registerReceiver")) {
       cbc = callbackContext;
-      // An example of returning data back to the web layer
-      PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
+      PluginResult result = new PluginResult(PluginResult.Status.OK, "aktivoitu");
       result.setKeepCallback(true);
-      Log.e("ARI","oujee");
+      Log.e("ARI","registerReceiver: "+args);
       cbc.sendPluginResult(result);
     }
     return true;
