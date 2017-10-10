@@ -21,6 +21,7 @@ import android.os.Message;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Date;
+import org.apache.commons.codec.binary.Base64;
 
 public class cordovaPluginDfu extends CordovaPlugin {
   private static final String TAG = "cordovaPluginDfu";
@@ -101,9 +102,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARI","readBytes. read?? ");
         for (int i=0;i<ret.length;i++)
           json.put("byte"+i, ret[i]);
-        json.put("bytes",new JSONArray(new String(ret)));
+        json.put("bytes",Base64.encodeBase64String(ret) )
       } catch (Exception e) {
-        Log.e("ARI","dah");
+        Log.e("ARI","dah "+e);
         return true;
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
