@@ -28,7 +28,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Dfu dfu;
   private CallbackContext cbc;
 
-  private boolean send2JS(String msg) {
+  private boolean send2JS(JSONObject msg) {
     if (cbc != null) {
       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, msg);
       pluginResult.setKeepCallback(true);
@@ -56,11 +56,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
     usb.setOnUsbChangeListener(new Usb.OnUsbChangeListener() {
       public void onUsbConnected() {
-        final String deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
-        Log.e("ARIM","connected "+deviceInfo);
+        JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
+        Log.e("ARIM","connected ");
         //status.setText(deviceInfo);
         dfu.setUsb(usb);
-        send2JS("got device");
+        send2JS(deviceInfo);
       }
     });
 
@@ -93,7 +93,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
       cbc = callbackContext;
-      send2JS("aktivoitu");
+      JSONObject json = new JSONObject();
+      json.put("foo", "active");
+      send2JS(json);
     }
     return true;
   }
