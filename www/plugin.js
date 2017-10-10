@@ -7,6 +7,9 @@ var cordovaPluginDfu = {
   massErase: function(cb) {
     exec(cb, null, PLUGIN_NAME, 'massErase', []);
   },
+  readBytes: function(startAddr,bytes,cb) {
+    exec(cb, null, PLUGIN_NAME, 'readBytes', [startAddr,bytes]);
+  },
   registerReceiver: function(act,cb) {
     exec(cb, null, PLUGIN_NAME, 'registerReceiver', [act]);
   }

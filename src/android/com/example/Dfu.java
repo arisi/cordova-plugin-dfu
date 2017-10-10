@@ -459,6 +459,35 @@ public class Dfu {
         }
     }
 
+    public byte[] readBytes(int startAddress,int bytes) throws Exception {
+      if (!isUsbConnected()) return;
+
+      try {
+        do {
+            clearStatus();
+            getStatus(dfuStatus);
+        } while (dfuStatus.bState != STATE_DFU_IDLE);
+
+        setAddressPointer(startAddress);
+        getStatus(dfuStatus);   // to execute
+        getStatus(dfuStatus);   //to verify
+        if (dfuStatus.bState == STATE_DFU_ERROR) {
+            throw new Exception("Start address not supported");
+        }
+
+        while (dfuStatus.bState != STATE_DFU_IDLE) {        // todo if fails, maybe stop reading
+            clearStatus();
+            getStatus(dfuStatus);
+        }
+        byte[] block = new byte[32];
+        upload(block, bytes, 2);
+        getStatus(dfuStatus);
+        return block
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+    }
+
     // this can be used if the filePath is known to .dfu file
     private void openFile(String filePath) throws Exception {
 

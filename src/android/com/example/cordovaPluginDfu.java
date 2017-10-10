@@ -81,15 +81,20 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-    if(action.equals("massErase")) {
-      Log.e("ARIM","erase");
+    if (action.equals("massErase")) {
       long ret=dfu.massErase();
-      Log.e("ARIM","erased?");
       JSONObject json = new JSONObject();
-      json.put("foo", "bar");
       json.put("eraseTime", ret);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
+
+    } else if (action.equals("readBytes")) {
+      long ret=dfu.readBytes(args[0],args[1]);
+      JSONObject json = new JSONObject();
+      json.put("bytes", ret);
+      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+      callbackContext.sendPluginResult(result);
+
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
       cbc = callbackContext;
