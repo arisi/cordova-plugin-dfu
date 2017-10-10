@@ -89,7 +89,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       callbackContext.sendPluginResult(result);
 
     } else if (action.equals("readBytes")) {
-      ret= new byte[100];
+      byte[] ret= new byte[100];
       //Arrays.fill( ret, (byte) 1 );
       try {
         int start=Integer.parseInt(args.getString(0));
