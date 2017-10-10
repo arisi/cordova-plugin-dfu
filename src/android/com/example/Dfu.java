@@ -189,9 +189,9 @@ public class Dfu {
         return result;
     }
 
-    public int massErase() {
+    public long massErase() {
 
-        if (!isUsbConnected()) return;
+        if (!isUsbConnected()) return -1;
 
         DfuStatus dfuStatus = new DfuStatus();
         long startTime = System.currentTimeMillis();  // note current time
@@ -206,7 +206,7 @@ public class Dfu {
             if (isDeviceProtected()) {
                 removeReadProtection();
                 Log.e(TAG,"Read Protection removed. Device resets...Wait until it   re-enumerates "); // XXX This will reset the device
-                return;
+                return -1;
             }
 
             massEraseCommand();                 // sent erase command request
