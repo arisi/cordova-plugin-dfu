@@ -204,7 +204,7 @@ public class Usb {
         json.put("vendor", device.getVendorId() + " (0x" + Integer.toHexString(device.getVendorId()) + ")");
         json.put("product", device.getProductId() + " (0x" + Integer.toHexString(device.getProductId()) + ")");
         json.put("version", Integer.toHexString(mDeviceVersion));
-        return json
+        return json;
     }
 
     public int getDeviceVersion() {
