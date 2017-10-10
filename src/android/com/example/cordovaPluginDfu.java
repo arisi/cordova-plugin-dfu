@@ -97,18 +97,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int start=Integer.parseInt(args.getString(0));
         Log.e("ARI","readBytes. start= "+start);
         int bytes=Integer.parseInt(args.getString(1));
-        Log.e("ARI","readBytes. start= "+bytes);
+        Log.e("ARI","readBytes. bytes= "+bytes);
         byte[] ret = dfu.readBytes( start,bytes ) ;
-        Log.e("ARI","readBytes. read?? ");
-        String s="[";
+        String s="0x";
         for (int i=0;i<ret.length;i++) {
           json.put("byte"+i, ret[i]);
-          if (i>0)
-            s=s+","+ret[i];
-          else
-            s=s+" "+ret[i];
+          s=s+String.format("%02X", ret[i]);
         }
-        s=s+" ]";
         json.put("bytes",s);
       } catch (Exception e) {
         Log.e("ARI","dah "+e);
