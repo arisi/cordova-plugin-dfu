@@ -95,7 +95,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int start=Integer.parseInt(args.getString(0));
         int bytes=Integer.parseInt(args.getString(1));
         ret=dfu.readBytes( start,bytes ) ;
-      } catch (JSONException e) {
+      } catch (Exception e) {
         Log.e("ARI","dah");
         return true;
       }
