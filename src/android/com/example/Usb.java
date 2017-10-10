@@ -31,7 +31,7 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-//import org.json.JSONException;
+import org.json.JSONException;
 
 public class Usb {
 
@@ -200,15 +200,18 @@ public class Usb {
         JSONObject json = new JSONObject();
         if (device == null)
             return json;
-
-        json.put("model", device.getDeviceName());
-        json.put("id", device.getDeviceId() + " (0x" + Integer.toHexString(device.getDeviceId()) + ")");
-        json.put("class", device.getDeviceClass());
-        json.put("subclass", device.getDeviceSubclass());
-        json.put("vendor", device.getVendorId() + " (0x" + Integer.toHexString(device.getVendorId()) + ")");
-        json.put("product", device.getProductId() + " (0x" + Integer.toHexString(device.getProductId()) + ")");
-        json.put("version", Integer.toHexString(mDeviceVersion));
-        return json;
+        try {
+          json.put("model", device.getDeviceName());
+          json.put("id", device.getDeviceId() + " (0x" + Integer.toHexString(device.getDeviceId()) + ")");
+          json.put("class", device.getDeviceClass());
+          json.put("subclass", device.getDeviceSubclass());
+          json.put("vendor", device.getVendorId() + " (0x" + Integer.toHexString(device.getVendorId()) + ")");
+          json.put("product", device.getProductId() + " (0x" + Integer.toHexString(device.getProductId()) + ")");
+          json.put("version", Integer.toHexString(mDeviceVersion));
+          return json;
+        } catch (JSONException e) {
+          return json;
+        }
     }
 
     public int getDeviceVersion() {
