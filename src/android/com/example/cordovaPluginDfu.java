@@ -85,7 +85,10 @@ public class cordovaPluginDfu extends CordovaPlugin {
       Log.e("ARIM","erase");
       long ret=dfu.massErase();
       Log.e("ARIM","erased?");
-      final PluginResult result = new PluginResult(PluginResult.Status.OK, "erased: "+ret);
+      JSONObject json = new JSONObject();
+      json.put("foo", "bar");
+      json.put("eraseTime", ret);
+      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
