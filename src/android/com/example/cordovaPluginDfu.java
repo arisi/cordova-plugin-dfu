@@ -83,7 +83,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if(action.equals("massErase")) {
       Log.e("ARIM","erase");
-      int ret=dfu.massErase();
+      long ret=dfu.massErase();
       Log.e("ARIM","erased?");
       final PluginResult result = new PluginResult(PluginResult.Status.OK, "erased: "+ret);
       callbackContext.sendPluginResult(result);
