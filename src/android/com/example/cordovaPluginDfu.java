@@ -97,6 +97,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         ret=dfu.readBytes( start,bytes ) ;
       } catch (JSONException e) {
         Log.e("ARI","dah");
+        return true;
       }
       JSONObject json = new JSONObject();
       json.put("bytes", ret);
