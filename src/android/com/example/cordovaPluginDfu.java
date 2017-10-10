@@ -89,7 +89,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       callbackContext.sendPluginResult(result);
 
     } else if (action.equals("readBytes")) {
-      long ret=dfu.readBytes(args.getString(0),args.getString(1));
+      long ret=dfu.readBytes( Integer.parseInt(args.getString(0)), Integer.parseInt(args.getString(1)) ;
       JSONObject json = new JSONObject();
       json.put("bytes", ret);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);

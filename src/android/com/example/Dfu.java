@@ -487,6 +487,7 @@ public class Dfu {
       } catch (Exception e) {
           e.printStackTrace();
       }
+      return block;
     }
 
     // this can be used if the filePath is known to .dfu file
