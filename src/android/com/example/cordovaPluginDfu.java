@@ -97,7 +97,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int start=Integer.parseInt(args.getString(0));
         int bytes=Integer.parseInt(args.getString(1));
         byte[] ret = dfu.readBytes( start,bytes ) ;
-        String s="0x";
+        String s="";
         for (int i=0;i<bytes;i++) {
           s=s+String.format("%02X", ret[i]);
         }
