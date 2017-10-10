@@ -28,6 +28,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Dfu dfu;
   private CallbackContext cbc;
 
+  private send2JS(msg) {
+    if (cbc != null) {
+      PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, msg);
+      pluginResult.setKeepCallback(true);
+      Log.e("ARIMx","cb?");
+      cbc.sendPluginResult(pluginResult);
+      Log.e("ARIMx","cb ok");
+    } else {
+      Log.e("ARIMx","NO CBC");
+    }
+  }
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 
@@ -50,16 +61,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIM","erase");
         dfu.massErase();
         Log.e("ARIM","erased?");
-        if (cbc != null) {
-          PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "WHAT");
-          pluginResult.setKeepCallback(true);
-          Log.e("ARIM","cb?");
-          cbc.sendPluginResult(pluginResult);
-          Log.e("ARIM","cb ok");
-        } else {
-          Log.e("ARIM","NO CBC");
-
-        }
+        send2JS("got device");
       }
     });
 
