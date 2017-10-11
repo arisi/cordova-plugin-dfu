@@ -90,6 +90,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       for (Account account : accounts) {
         Log.e("ARIACC","acc "+account);
       }
+      Account[] accounts = AccountManager.get(this).getAccounts();
+      Log.e("ARIACC2","accs: "+accounts);
       JSONObject json = new JSONObject();
       json.put("duh", 123);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
