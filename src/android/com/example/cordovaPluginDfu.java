@@ -86,6 +86,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("getAuth")) {
       Account[] accounts = AccountManager.get(this.cordova.getActivity().getApplicationContext()).getAccounts();
+      Log.e("ARIACC","accs: "+accounts);
       for (Account account : accounts) {
         Log.e("ARIACC","acc "+account);
       }
