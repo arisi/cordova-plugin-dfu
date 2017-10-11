@@ -83,7 +83,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     if (action.equals("getAuth")) {
       Account[] accounts = AccountManager.get(this.cordova.getActivity().getApplicationContext()).getAccounts();
       for (Account account : accounts) {
-        Log.e("ARIACC","acc "+account)
+        Log.e("ARIACC","acc "+account);
       }
       JSONObject json = new JSONObject();
       json.put("duh", 123);
