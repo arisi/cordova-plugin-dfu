@@ -89,7 +89,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       json.put("duh", 123);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
-    else if (action.equals("massErase")) {
+    } else if (action.equals("massErase")) {
       long ret=dfu.massErase();
       JSONObject json = new JSONObject();
       json.put("eraseTime", ret);
