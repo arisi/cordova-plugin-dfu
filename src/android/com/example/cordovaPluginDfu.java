@@ -79,9 +79,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
   //@Override
 
-
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-    if (action.equals("massErase")) {
+    if (action.equals("getAuth")) {
+      Account[] accounts = AccountManager.get(this.cordova.getActivity().getApplicationContext()).getAccounts();
+      for (Account account : accounts) {
+        Log.e("ARIACC","acc "+account)
+      }
+      JSONObject json = new JSONObject();
+      json.put("duh", 123);
+      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+      callbackContext.sendPluginResult(result);
+    else if (action.equals("massErase")) {
       long ret=dfu.massErase();
       JSONObject json = new JSONObject();
       json.put("eraseTime", ret);
