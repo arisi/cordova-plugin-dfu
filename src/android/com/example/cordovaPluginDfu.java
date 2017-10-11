@@ -18,7 +18,10 @@ import android.hardware.usb.UsbManager;
 import android.os.Handler;
 import android.os.Message;
 
-import android.accounts;
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Date;
