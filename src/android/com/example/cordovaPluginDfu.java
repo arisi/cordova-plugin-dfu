@@ -12,8 +12,9 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.content.Context;
-import android.content.IntentFilter;
+//import android.content.Context;
+//import android.content.IntentFilter;
+import android.content.*;
 import android.hardware.usb.UsbManager;
 import android.os.Handler;
 import android.os.Message;
