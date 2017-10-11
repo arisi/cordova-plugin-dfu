@@ -12,7 +12,7 @@ var cordovaPluginDfu = {
   },
   registerReceiver: function(act,cb) {
     exec(cb, null, PLUGIN_NAME, 'registerReceiver', [act]);
-  }
+  },
   getAuth: function(cb) {
     exec(cb, null, PLUGIN_NAME, 'getAuth', []);
   }
