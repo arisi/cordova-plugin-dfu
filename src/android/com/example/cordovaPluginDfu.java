@@ -72,7 +72,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     });
 
     dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
-    manager =AccountManager.get( cordova.getActivity().getApplicationContext() )
+    manager =AccountManager.get( cordova.getActivity().getApplicationContext() );
     Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
     // hence ACTION_USB_DEVICE_ATTACHED will not occur so we explicitly call for permission
