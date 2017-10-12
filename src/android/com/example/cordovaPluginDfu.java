@@ -164,8 +164,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       json.put("foo", "active");
       //send2JS(json);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
-      pluginResult.setKeepCallback(true);
-      cbc.sendPluginResult(pluginResult);
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
       usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
     }
     return true;
