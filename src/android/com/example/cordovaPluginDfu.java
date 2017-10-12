@@ -72,7 +72,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       public void onUsbConnected() {
         JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
         Log.e("ARIM","connected ");
-        //status.setText(deviceInfo);
+        status.setText(deviceInfo);
         dfu.setUsb(usb);
         send2JS(deviceInfo);
       }
@@ -167,12 +167,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
       send2JS(json);
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
+      
       if (cbc==null) {
-        cbc = callbackContext;
-        Log.e("ARIMx","saved cbc");
         myTimerTask = new MyTimerTask();
         timer.schedule(myTimerTask, 1000, 5000);
       }
+      cbc = callbackContext;
+      Log.e("ARIMx","saved cbc");
       JSONObject json = new JSONObject();
       json.put("foo", "active");
       //send2JS(json);
