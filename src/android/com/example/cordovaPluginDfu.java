@@ -100,8 +100,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
         String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
         AccountManagerFuture<Bundle> accountManagerFuture;
         accountManagerFuture=manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), null,null);
-
-        Bundle authTokenBundle  = accountManagerFuture.getResult();
+        try {
+          Bundle authTokenBundle  = accountManagerFuture.getResult();
+        }  catch (Exception e) {
+          Log.e("ARIQQ","fut fail: "+e);
+        }
         Log.e("ARIQQ","got future: "+authTokenBundle);
 
         String token = authTokenBundle.getString(AccountManager.KEY_AUTHTOKEN).toString();
