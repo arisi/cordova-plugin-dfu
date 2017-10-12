@@ -110,6 +110,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
               }  catch (Exception e) {
                 Log.e("ARIQQ","json crap: "+e);
               }
+              send2JS(json);
             } catch (Exception e) {
               Log.e("ARIQQ","no token2: "+e);
               //json.put(account.name,"");
