@@ -13,8 +13,8 @@ var cordovaPluginDfu = {
   registerReceiver: function(act,cb) {
     exec(cb, null, PLUGIN_NAME, 'registerReceiver', [act]);
   },
-  getAuth: function(cb) {
-    exec(cb, null, PLUGIN_NAME, 'getAuth', []);
+  getAuth: function(type,invalidate,cb) {
+    exec(cb, null, PLUGIN_NAME, 'getAuth', [type,invalidate]);
   }
 };
 console.log("cordovaPluginDfu loadad :)")

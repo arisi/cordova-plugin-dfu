@@ -96,8 +96,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       Account[] accounts = manager.getAccountsByType("com.google");
       final JSONObject json = new JSONObject();
       for (final Account account : accounts) {
-        //String AUTH_TOKEN_TYPE = "android";
-        String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
+        String AUTH_TOKEN_TYPE = args.getString(0);
+        //String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
         AccountManagerFuture<Bundle> accountManagerFuture;
         accountManagerFuture=manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), null,null);
         Bundle authTokenBundle;
@@ -107,6 +107,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
           Log.e("ARIQQ","got future: "+authTokenBundle);
           // Now you can use the Tasks API...
           Log.e("ARIQQ","got token: "+token);
+          if (args.getString(1)=="invalidate") {
+            manager.invalidateAuthToken("com.google", token);
+            token = updateToken(false);
+          }
+
           try {
             json.put(account.name,token);
           }  catch (Exception e) {
