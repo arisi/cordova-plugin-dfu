@@ -89,9 +89,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("getAuth")) {
-      //Account[] accounts = AccountManager.get( cordova.getActivity().getApplicationContext() ).getAccounts();
-
       Account[] accounts = manager.getAccountsByType("com.google");
+      JSONObject json = new JSONObject();
       for (Account account : accounts) {
         json.put(account.name,account.type);
       }
