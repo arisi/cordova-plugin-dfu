@@ -100,23 +100,23 @@ public class cordovaPluginDfu extends CordovaPlugin {
         String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
         AccountManagerFuture<Bundle> accountManagerFuture;
         accountManagerFuture=manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), null,null);
+        Bundle authTokenBundle;
         try {
-          Bundle authTokenBundle  = accountManagerFuture.getResult();
+          authTokenBundle  = accountManagerFuture.getResult();
+          String token = authTokenBundle.getString(AccountManager.KEY_AUTHTOKEN).toString();
+          Log.e("ARIQQ","got future: "+authTokenBundle);
+          // Now you can use the Tasks API...
+          Log.e("ARIQQ","got token: "+token);
+          try {
+            json.put(account.name,token);
+          }  catch (Exception e) {
+            Log.e("ARIQQ","json crap: "+e);
+          }
+          final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+          callbackContext.sendPluginResult(result);
         }  catch (Exception e) {
           Log.e("ARIQQ","fut fail: "+e);
         }
-        Log.e("ARIQQ","got future: "+authTokenBundle);
-
-        String token = authTokenBundle.getString(AccountManager.KEY_AUTHTOKEN).toString();
-        // Now you can use the Tasks API...
-        Log.e("ARIQQ","got token: "+token);
-        try {
-          json.put(account.name,token);
-        }  catch (Exception e) {
-          Log.e("ARIQQ","json crap: "+e);
-        }
-        final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
-        callbackContext.sendPluginResult(result);
         break;
       }
       //final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
