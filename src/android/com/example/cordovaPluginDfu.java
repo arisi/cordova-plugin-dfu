@@ -97,7 +97,6 @@ public class cordovaPluginDfu extends CordovaPlugin {
       final JSONObject json = new JSONObject();
       for (final Account account : accounts) {
         String AUTH_TOKEN_TYPE = args.getString(0);
-        //String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
         AccountManagerFuture<Bundle> accountManagerFuture;
         accountManagerFuture=manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), null,null);
         Bundle authTokenBundle;
@@ -119,13 +118,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
           }
           final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
           callbackContext.sendPluginResult(result);
+          break;
         }  catch (Exception e) {
           Log.e("ARIQQ","fut fail: "+e);
         }
-        break;
       }
-      //final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
-      //callbackContext.sendPluginResult(result);
+      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+      callbackContext.sendPluginResult(result);
     } else if (action.equals("massErase")) {
       long ret=dfu.massErase();
       JSONObject json = new JSONObject();
@@ -157,10 +156,16 @@ public class cordovaPluginDfu extends CordovaPlugin {
       send2JS(json);
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
-      cbc = callbackContext;
+      if (cbc==null) {
+        cbc = callbackContext;
+        Log.e("ARIMx","saved cbc");
+      }
       JSONObject json = new JSONObject();
       json.put("foo", "active");
-      send2JS(json);
+      //send2JS(json);
+      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+      pluginResult.setKeepCallback(true);
+      cbc.sendPluginResult(pluginResult);
       usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
     }
     return true;
