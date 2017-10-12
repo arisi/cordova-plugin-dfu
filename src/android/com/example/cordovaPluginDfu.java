@@ -24,6 +24,8 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
+
+
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Date;
@@ -96,7 +98,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       for (Account account : accounts) {
         json.put(account.name,account.type);
         String AUTH_TOKEN_TYPE = "Manage your tasks";
-        manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity().getApplicationContext(), new AccountManagerCallback<Bundle>() {
+        manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), new AccountManagerCallback<Bundle>() {
           public void run(AccountManagerFuture<Bundle> future) {
             try {
               // If the user has authorized your application to use the tasks API
