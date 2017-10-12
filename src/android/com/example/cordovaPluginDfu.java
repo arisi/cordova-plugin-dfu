@@ -25,6 +25,8 @@ import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.util.Log;
 import java.util.Arrays;
@@ -37,6 +39,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Dfu dfu;
   private CallbackContext cbc;
   private AccountManager manager;
+  private Timer timer;
+  private MyTimerTask myTimerTask;
 
   private boolean send2JS(JSONObject msg) {
     if (cbc != null) {
@@ -88,7 +92,14 @@ public class cordovaPluginDfu extends CordovaPlugin {
   //}
 
   //@Override
+  class MyTimerTask extends TimerTask {
 
+   @Override
+   public void run() {
+     Log.e("ARITICK","TOCK")
+   }
+
+  }
 
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -159,6 +170,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       if (cbc==null) {
         cbc = callbackContext;
         Log.e("ARIMx","saved cbc");
+        myTimerTask = new MyTimerTask();
+        timer.schedule(myTimerTask, 1000, 5000);
       }
       JSONObject json = new JSONObject();
       json.put("foo", "active");
