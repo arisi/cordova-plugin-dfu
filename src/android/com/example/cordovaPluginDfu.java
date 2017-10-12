@@ -85,21 +85,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   //}
 
   //@Override
-  manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, activity, new AccountManagerCallback<Bundle>() {
-    public void run(AccountManagerFuture<Bundle> future) {
-      try {
-        // If the user has authorized your application to use the tasks API
-        // a token is available.
-        String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
-        // Now you can use the Tasks API...
-        useTasksAPI(token);
-      } catch (OperationCanceledException e) {
-        // TODO: The user has denied you access to the API, you should handle that
-      } catch (Exception e) {
-        handleException(e);
-      }
-    }
-  }, null);
+
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("getAuth")) {
