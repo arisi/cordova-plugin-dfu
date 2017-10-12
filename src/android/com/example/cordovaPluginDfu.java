@@ -104,9 +104,6 @@ public class cordovaPluginDfu extends CordovaPlugin {
               String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
               // Now you can use the Tasks API...
               Log.e("ARIQQ","got token: "+token);
-            } catch (OperationCanceledException e) {
-              // TODO: The user has denied you access to the API, you should handle that
-              Log.e("ARIQQ","no token: "+e);
             } catch (Exception e) {
               Log.e("ARIQQ","no token2: "+e);
             }
