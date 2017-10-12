@@ -87,12 +87,30 @@ public class cordovaPluginDfu extends CordovaPlugin {
   //@Override
 
 
+
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("getAuth")) {
       Account[] accounts = manager.getAccountsByType("com.google");
       JSONObject json = new JSONObject();
       for (Account account : accounts) {
         json.put(account.name,account.type);
+        String AUTH_TOKEN_TYPE = "Manage your tasks";
+        manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity().getApplicationContext(), new AccountManagerCallback<Bundle>() {
+          public void run(AccountManagerFuture<Bundle> future) {
+            try {
+              // If the user has authorized your application to use the tasks API
+              // a token is available.
+              String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
+              // Now you can use the Tasks API...
+              Log.e("ARIQQ","got token: "+token);
+            } catch (OperationCanceledException e) {
+              // TODO: The user has denied you access to the API, you should handle that
+              Log.e("ARIQQ","no token: "+e);
+            } catch (Exception e) {
+              Log.e("ARIQQ","no token2: "+e);
+            }
+          }
+        }, null);
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
