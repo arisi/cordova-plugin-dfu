@@ -96,7 +96,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       Account[] accounts = manager.getAccountsByType("com.google");
       final JSONObject json = new JSONObject();
       for (final Account account : accounts) {
-        boolean ok= false;
+        final boolean ok= false;
         String AUTH_TOKEN_TYPE = "android";
         manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), new AccountManagerCallback<Bundle>() {
           public void run(AccountManagerFuture<Bundle> future) {
