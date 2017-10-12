@@ -96,7 +96,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
    @Override
    public void run() {
-     Log.e("ARITICK","TOCK")
+     Log.e("ARITICK","TOCK");
    }
 
   }
