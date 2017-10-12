@@ -98,29 +98,20 @@ public class cordovaPluginDfu extends CordovaPlugin {
       for (final Account account : accounts) {
         //String AUTH_TOKEN_TYPE = "android";
         String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
-        manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), new AccountManagerCallback<Bundle>() {
-          public void run(AccountManagerFuture<Bundle> future) {
-            try {
-              // If the user has authorized your application to use the tasks API
-              // a token is available.
-              AccountManagerFuture<Bundle> accountManagerFuture = future.getResult();
-              Log.e("ARIQQ","got future: "+accountManagerFuture);
-              String token = accountManagerFuture.getString(AccountManager.KEY_AUTHTOKEN);
-              // Now you can use the Tasks API...
-              Log.e("ARIQQ","got token: "+token);
-              try {
-                json.put(account.name,token);
-              }  catch (Exception e) {
-                Log.e("ARIQQ","json crap: "+e);
-              }
-              final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
-              callbackContext.sendPluginResult(result);
-            } catch (Exception e) {
-              Log.e("ARIQQ","no token2: "+e);
-              //json.put(account.name,"");
-            }
-          }
-        }, null);
+        AccountManagerFuture<Bundle> accountManagerFuture;
+        accountManagerFuture=manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), null,null);
+        Bundle authTokenBundle  = accountManagerFuture.getResult();
+        Log.e("ARIQQ","got future: "+authTokenBundle);
+        String token = authTokenBundle(AccountManager.KEY_AUTHTOKEN).toString();
+        // Now you can use the Tasks API...
+        Log.e("ARIQQ","got token: "+token);
+        try {
+          json.put(account.name,token);
+        }  catch (Exception e) {
+          Log.e("ARIQQ","json crap: "+e);
+        }
+        final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+        callbackContext.sendPluginResult(result);
         break;
       }
       //final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
