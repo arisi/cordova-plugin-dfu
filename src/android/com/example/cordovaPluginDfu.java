@@ -51,7 +51,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       Log.e("ARIMx","cb ok");
       return true;
     } else {
-      Log.e("ARIMx","NO CBC");
+      Log.e("ARIMx","NO CBC "+cbc);
       return false;
     }
   }
@@ -168,18 +168,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
 
+      //if (cbc==null) {
+        //myTimerTask = new MyTimerTask();
+        //timer.schedule(myTimerTask, 1000, 5000);
+      //}
       if (cbc==null) {
-        myTimerTask = new MyTimerTask();
-        timer.schedule(myTimerTask, 1000, 5000);
+        cbc = callbackContext;
+        Log.e("ARIMx","saved cbc "+cbc);
       }
-      cbc = callbackContext;
-      Log.e("ARIMx","saved cbc");
       JSONObject json = new JSONObject();
       json.put("foo", "active");
-      //send2JS(json);
-      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
-      result.setKeepCallback(true);
-      callbackContext.sendPluginResult(result);
+      send2JS(json);
       usb.requestPermission(this.cordova.getActivity().getApplicationContext(), Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
     }
     return true;
