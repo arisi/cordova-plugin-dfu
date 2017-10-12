@@ -110,7 +110,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
               }  catch (Exception e) {
                 Log.e("ARIQQ","json crap: "+e);
               }
-              send2JS(json);
+              final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+              callbackContext.sendPluginResult(result);
             } catch (Exception e) {
               Log.e("ARIQQ","no token2: "+e);
               //json.put(account.name,"");
@@ -119,8 +120,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
         }, null);
         break;
       }
-      final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
-      callbackContext.sendPluginResult(result);
+      //final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
+      //callbackContext.sendPluginResult(result);
     } else if (action.equals("massErase")) {
       long ret=dfu.massErase();
       JSONObject json = new JSONObject();
@@ -149,7 +150,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
-      send2JS(json);      
+      send2JS(json);
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
       cbc = callbackContext;
