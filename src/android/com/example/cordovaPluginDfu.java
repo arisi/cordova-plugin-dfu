@@ -109,7 +109,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
           Log.e("ARIQQ","got token: "+token);
           if (args.getString(1)=="invalidate") {
             manager.invalidateAuthToken("com.google", token);
-            token = updateToken(false);
+            //token = updateToken(false);
           }
 
           try {
