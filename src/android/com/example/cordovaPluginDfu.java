@@ -100,9 +100,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
         String AUTH_TOKEN_TYPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
         AccountManagerFuture<Bundle> accountManagerFuture;
         accountManagerFuture=manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, cordova.getActivity(), null,null);
+
         Bundle authTokenBundle  = accountManagerFuture.getResult();
         Log.e("ARIQQ","got future: "+authTokenBundle);
-        String token = authTokenBundle(AccountManager.KEY_AUTHTOKEN).toString();
+
+        String token = authTokenBundle.getString(AccountManager.KEY_AUTHTOKEN).toString();
         // Now you can use the Tasks API...
         Log.e("ARIQQ","got token: "+token);
         try {
