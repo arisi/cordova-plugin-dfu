@@ -94,7 +94,6 @@ public class cordovaPluginDfu extends CordovaPlugin {
       for (Account account : accounts) {
         json.put(account.name,account.type);
       }
-      JSONObject json = new JSONObject();
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
     } else if (action.equals("massErase")) {
