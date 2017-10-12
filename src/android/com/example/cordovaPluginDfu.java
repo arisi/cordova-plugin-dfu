@@ -94,7 +94,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("getAuth")) {
       Account[] accounts = manager.getAccountsByType("com.google");
-      JSONObject json = new JSONObject();
+      final JSONObject json = new JSONObject();
       for (Account account : accounts) {
         boolean ok= false;
         String AUTH_TOKEN_TYPE = "android";
