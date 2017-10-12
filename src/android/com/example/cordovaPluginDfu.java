@@ -149,6 +149,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
+      send2JS(json);      
     } else if(action.equals("registerReceiver")) {
       Log.e("ARI","registerReceiver: "+args);
       cbc = callbackContext;
