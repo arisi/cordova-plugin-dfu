@@ -103,7 +103,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
             try {
               // If the user has authorized your application to use the tasks API
               // a token is available.
-              String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
+              AccountManagerFuture<Bundle> accountManagerFuture = future.getResult()
+              Log.e("ARIQQ","got future: "+accountManagerFuture);
+              String token = accountManagerFuture.getString(AccountManager.KEY_AUTHTOKEN);
               // Now you can use the Tasks API...
               Log.e("ARIQQ","got token: "+token);
               try {
