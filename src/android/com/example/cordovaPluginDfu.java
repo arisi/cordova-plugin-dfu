@@ -33,6 +33,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
   private Usb usb;
   private Dfu dfu;
   private CallbackContext cbc;
+  private AccountManager manager;
 
   private boolean send2JS(JSONObject msg) {
     if (cbc != null) {
@@ -71,6 +72,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     });
 
     dfu = new Dfu(Usb.USB_VENDOR_ID, Usb.USB_PRODUCT_ID);
+    manager =AccountManager.get( cordova.getActivity().getApplicationContext() )
     Log.e("ARIX","dfu done :)");
     // Handle case where USB device is connected before app launches;
     // hence ACTION_USB_DEVICE_ATTACHED will not occur so we explicitly call for permission
@@ -83,16 +85,31 @@ public class cordovaPluginDfu extends CordovaPlugin {
   //}
 
   //@Override
+  manager.getAuthToken(account, AUTH_TOKEN_TYPE, null, activity, new AccountManagerCallback<Bundle>() {
+    public void run(AccountManagerFuture<Bundle> future) {
+      try {
+        // If the user has authorized your application to use the tasks API
+        // a token is available.
+        String token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);
+        // Now you can use the Tasks API...
+        useTasksAPI(token);
+      } catch (OperationCanceledException e) {
+        // TODO: The user has denied you access to the API, you should handle that
+      } catch (Exception e) {
+        handleException(e);
+      }
+    }
+  }, null);
 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("getAuth")) {
-      Account[] accounts = AccountManager.get( cordova.getActivity().getApplicationContext() ).getAccounts();
-      Log.e("ARIACC","accs: "+accounts);
+      //Account[] accounts = AccountManager.get( cordova.getActivity().getApplicationContext() ).getAccounts();
+
+      Account[] accounts = manager.getAccountsByType("com.google");
       for (Account account : accounts) {
-        Log.e("ARIACC","acc "+account);
+        json.put(account.name,account.type);
       }
       JSONObject json = new JSONObject();
-      json.put("duh", 123);
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
     } else if (action.equals("massErase")) {
