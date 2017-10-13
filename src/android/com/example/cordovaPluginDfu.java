@@ -123,7 +123,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
           }
 
           try {
-            json.put(account.name,token);
+            json.put("provider","google");
+            json.put("name",account.name);
+            json.put("token",token);
           }  catch (Exception e) {
             Log.e("ARIQQ","json crap: "+e);
           }
