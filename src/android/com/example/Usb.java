@@ -228,13 +228,14 @@ public class Usb {
             Log.e("ARIS","got opened: '"+serialPort);
             if (serialPort != null) {
                 if (serialPort.open()) {
+                    Log.e("ARIS","got really opened");
                     serialPort.setBaudRate(9600);
                     serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
                     serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                     serialPort.setParity(UsbSerialInterface.PARITY_NONE);
                     serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
-                    serialPort.read(mCallback);
-                    Log.e("ARIS","got really opened: '");
+                    //serialPort.read(mCallback);
+                    Log.e("ARIS","got really conf");
 
                     // Everything went as expected. Send an intent to MainActivity
                     //Intent intent = new Intent(ACTION_USB_READY);
