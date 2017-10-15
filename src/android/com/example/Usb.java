@@ -48,6 +48,8 @@ public class Usb {
     /* USB DFU ID's (may differ by device) */
     public final static int USB_VENDOR_ID = 1155;   // VID while in DFU mode 0x0483
     public final static int USB_PRODUCT_ID = 57105; // PID while in DFU mode 0xDF11
+    public final static int USB_VENDOR_ID2 = 17539;   // VID while in DFU mode 0x0483
+    public final static int USB_PRODUCT_ID2 = 22336; // PID while in DFU mode 0xDF11
 
     public static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
 
@@ -126,9 +128,6 @@ public class Usb {
 
     public void requestPermission(Context context, int vendorId, int productId) {
         // Setup Pending Intent
-        Log.e("ARI9","reqPerm suppressed");
-        return;
-        /*
         Log.e("ARI9","reqPerm");
         PendingIntent permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(Usb.ACTION_USB_PERMISSION), 0);
         Log.e("ARI9","reqPerm2: "+permissionIntent);
@@ -137,14 +136,23 @@ public class Usb {
 
         if (device != null) {
             Log.e("ARI9","reqPerm4");
-
             mUsbManager.requestPermission(device, permissionIntent);
             Log.e("ARI9","reqPerm5");
         } else {
-          Log.e("ARI9","not for us !");
+          Log.e("ARI9","not dfu --serial? ");
+          UsbDevice device = getUsbDevice(vendorId2, productId2);
+          Log.e("ARI9","reqPerm3s: "+device);
+
+          if (device != null) {
+              Log.e("ARI9","reqPerm4s IT IS SERIAL");
+              //mUsbManager.requestPermission(device, permissionIntent);
+              //Log.e("ARI9","reqPerm5");
+          } else {
+            Log.e("ARI9","not for us definately!");
+
+          }
 
         }
-        */
     }
 
     private UsbDevice getUsbDevice(int vendorId, int productId) {
