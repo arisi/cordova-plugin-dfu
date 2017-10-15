@@ -105,7 +105,7 @@ public class Usb {
                               Log.e("ARIS","found device SERIAL");
                               setDevices(device);
                               if (mOnUsbChangeListeners != null) {
-                                  mOnUsbChangeListeners.onUsbConnecteds("oujee");
+                                  mOnUsbChangeListeners.onUsbConnecteds("connected");
                               }
 
                             } else {
@@ -232,6 +232,10 @@ public class Usb {
                   s=s+String.format("%02X ", bytes[i]);
                 }
                 Log.e("ARIS","got data: "+s);
+                if (mOnUsbChangeListeners != null) {
+                    mOnUsbChangeListeners.onUsbConnecteds("data");
+                }
+
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -90,6 +90,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
         try {
           deviceInfo.put("type","serial");
+          deviceInfo.put("dada","dada");
         } catch (Exception e) {
           Log.e("ARI","duh");
         }
