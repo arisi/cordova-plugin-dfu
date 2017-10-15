@@ -78,7 +78,7 @@ public class Usb {
     }
 
     private OnUsbChangeListener mOnUsbChangeListener;
-    private OnUsbChangeListener mOnUsbChangeListeners;
+    private OnUsbChangeListeners mOnUsbChangeListeners;
 
     public UsbDevice getUsbDevice() {
         return mDevice;
