@@ -79,15 +79,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
       public void onUsbConnected() {
         JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
         Log.e("ARIM","connected DFU listener"+deviceInfo);
+        json.put("type","dfu");
         //status.setText(deviceInfo);
         dfu.setUsb(usb);
         send2JS(deviceInfo);
       }
     });
     usb.setOnUsbChangeListeners(new Usb.OnUsbChangeListeners() {
-      public void onUsbConnecteds() {
+      public void onUsbConnecteds(String dada) {
         JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
-        Log.e("ARIM","connected SERIAL"+deviceInfo);
+        json.put("type","serial");
+        Log.e("ARIM","connected SERIAL '"+dada+"'"+deviceInfo);
         //status.setText(deviceInfo);
         send2JS(deviceInfo);
       }
