@@ -79,24 +79,38 @@ public class cordovaPluginDfu extends CordovaPlugin {
       public void onUsbConnected() {
         JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
         Log.e("ARIM","connected DFU listener"+deviceInfo);
-        //deviceInfo.put("type","dfu");
-        //status.setText(deviceInfo);
+        try {
+          deviceInfo.put("type","dfu");
+        } catch (Exception e) {
+          Log.e("ARI","duh");
+        }
         dfu.setUsb(usb);
         send2JS(deviceInfo);
       }
     });
     usb.setOnUsbChangeListeners(new Usb.OnUsbChangeListeners() {
       public void onUsbConnecteds(String dada) {
-        JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
-        try {
-          deviceInfo.put("type","serial");
-          deviceInfo.put("dada","dada");
-        } catch (Exception e) {
-          Log.e("ARI","duh");
+        if (dada=="connected") {
+          JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
+          try {
+            deviceInfo.put("type","serial");
+            deviceInfo.put("dada",dada);
+          } catch (Exception e) {
+            Log.e("ARI","duh");
+          }
+          Log.e("ARIM","connected SERIAL '"+dada+"'"+deviceInfo);
+          //status.setText(deviceInfo);
+          send2JS(deviceInfo);
+        } else {
+          JSONObject json = new JSONObject();
+          try {
+            deviceInfo.put("type","serial");
+            deviceInfo.put("dada",dada);
+          } catch (Exception e) {
+            Log.e("ARI","duh");
+          }
+          send2JS(json);
         }
-        Log.e("ARIM","connected SERIAL '"+dada+"'"+deviceInfo);
-        //status.setText(deviceInfo);
-        send2JS(deviceInfo);
       }
     });
 
