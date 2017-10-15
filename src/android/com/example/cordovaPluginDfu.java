@@ -69,6 +69,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     Log.e("ARI4", "Initializing cordovaPluginDfu");
     usb = new Usb(this.cordova.getActivity().getApplicationContext());
     usb.setUsbManager((UsbManager) this.cordova.getActivity().getApplicationContext().getSystemService(this.cordova.getActivity().getApplicationContext().USB_SERVICE));
+
     Log.e("ARI4", "Initialized usb: "+usb);
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(Usb.ACTION_USB_PERMISSION));
     this.cordova.getActivity().getApplicationContext().registerReceiver(usb.getmUsbReceiver(), new IntentFilter(UsbManager.ACTION_USB_DEVICE_ATTACHED));
@@ -77,9 +78,17 @@ public class cordovaPluginDfu extends CordovaPlugin {
     usb.setOnUsbChangeListener(new Usb.OnUsbChangeListener() {
       public void onUsbConnected() {
         JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
-        Log.e("ARIM","connected "+deviceInfo);
+        Log.e("ARIM","connected DFU listener"+deviceInfo);
         //status.setText(deviceInfo);
         dfu.setUsb(usb);
+        send2JS(deviceInfo);
+      }
+    });
+    usb.setOnUsbChangeListeners(new Usb.OnUsbChangeListener() {
+      public void onUsbConnecteds() {
+        JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
+        Log.e("ARIM","connected SERIAL"+deviceInfo);
+        //status.setText(deviceInfo);
         send2JS(deviceInfo);
       }
     });

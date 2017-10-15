@@ -70,8 +70,12 @@ public class Usb {
     public void setOnUsbChangeListener(OnUsbChangeListener l) {
         mOnUsbChangeListener = l;
     }
+    public void setOnUsbChangeListeners(OnUsbChangeListener l) {
+        mOnUsbChangeListeners = l;
+    }
 
     private OnUsbChangeListener mOnUsbChangeListener;
+    private OnUsbChangeListener mOnUsbChangeListeners;
 
     public UsbDevice getUsbDevice() {
         return mDevice;
@@ -97,6 +101,9 @@ public class Usb {
                             if (USB_VENDOR_ID2==deviceVID && USB_PRODUCT_ID2==devicePID) {
                               Log.e("ARIS","found device SERIAL");
                               setDevices(device);
+                              if (mOnUsbChangeListeners != null) {
+                                  mOnUsbChangeListeners.onUsbConnected();
+                              }
 
                             } else {
                               Log.e("ARIS","found device DFU");
@@ -124,8 +131,10 @@ public class Usb {
                     Log.e(TAG, "detached ");
                     if (serialPortConnected) {
                       Log.e(TAG, "detached serial");
-                      serialPortConnected = false;
-                      //serialPort.close();
+                      if (mDevice != null && mDevice.equals(device)) {
+                        serialPortConnected = false;
+                        serialPort.close();
+                      }
                     } else {
                       Log.e(TAG, "detached dfu");
                       UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
