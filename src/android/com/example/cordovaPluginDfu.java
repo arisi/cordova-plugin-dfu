@@ -106,7 +106,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
           try {
             json.put("type","serial");
             json.put("dada",dada);
-            json.put("bytes",bytes);
+            json.put("bytes",new JSONArray(bytes));
           } catch (Exception e) {
             Log.e("ARI","duh");
           }
