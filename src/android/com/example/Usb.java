@@ -208,11 +208,60 @@ public class Usb {
         return isReleased;
     }
 
+    private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() {
+        @Override
+        public void onReceivedData(byte[] arg0) {
+            try {
+                String data = new String(arg0, "UTF-8");
+                Lof.e("ARIS","got data: '"+data+"'")
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+
+    private class ConnectionThread extends Thread {
+        @Override
+        public void run() {
+            serialPort = UsbSerialDevice.createUsbSerialDevice(mDevice, mConnection);
+            if (serialPort != null) {
+                if (serialPort.open()) {
+                    serialPort.setBaudRate(BAUD_RATE);
+                    serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
+                    serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
+                    serialPort.setParity(UsbSerialInterface.PARITY_NONE);
+                    serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
+                    serialPort.read(mCallback);
+
+                    // Everything went as expected. Send an intent to MainActivity
+                    Intent intent = new Intent(ACTION_USB_READY);
+                    context.sendBroadcast(intent);
+                } else {
+                    // Serial port could not be opened, maybe an I/O error or if CDC driver was chosen, it does not really fit
+                    // Send an Intent to Main Activity
+                    if (serialPort instanceof CDCSerialDevice) {
+                        Intent intent = new Intent(ACTION_CDC_DRIVER_NOT_WORKING);
+                        context.sendBroadcast(intent);
+                    } else {
+                        Intent intent = new Intent(ACTION_USB_DEVICE_NOT_WORKING);
+                        context.sendBroadcast(intent);
+                    }
+                }
+            } else {
+                // No driver for given device, even generic CDC driver could not be loaded
+                Intent intent = new Intent(ACTION_USB_NOT_SUPPORTED);
+                context.sendBroadcast(intent);
+            }
+        }
+    }
+
     public void setDevices(UsbDevice device) {
         mDevice = device;
         if (device != null) {
             UsbDeviceConnection connection = mUsbManager.openDevice(device);
             serialPortConnected = true;
+            new ConnectionThread().run();
           }
     }
     public void setDevice(UsbDevice device) {
