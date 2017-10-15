@@ -131,6 +131,7 @@ public class Usb {
                     Log.e(TAG, "detached ");
                     if (serialPortConnected) {
                       Log.e(TAG, "detached serial");
+                      UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
                       if (mDevice != null && mDevice.equals(device)) {
                         serialPortConnected = false;
                         serialPort.close();
