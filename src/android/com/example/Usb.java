@@ -140,7 +140,7 @@ public class Usb {
             Log.e("ARI9","reqPerm5");
         } else {
           Log.e("ARI9","not dfu --serial? ");
-          device = getUsbDevice(vendorId2, productId2);
+          device = getUsbDevice(USB_VENDOR_ID2, USB_PRODUCT_ID2);
           Log.e("ARI9","reqPerm3s: "+device);
 
           if (device != null) {
