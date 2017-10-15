@@ -213,7 +213,7 @@ public class Usb {
         public void onReceivedData(byte[] arg0) {
             try {
                 String data = new String(arg0, "UTF-8");
-                Log.e("ARIS","got data: '"+data+"'");
+                Log.e("ARIS","got data: ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
