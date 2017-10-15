@@ -227,7 +227,14 @@ public class Usb {
             serialPort = UsbSerialDevice.createUsbSerialDevice(mDevice, mConnection);
             Log.e("ARIS","got opened: '"+serialPort);
             if (serialPort != null) {
-                if (serialPort.open()) {
+                try {
+                  boolean ok=serialPort.open();
+                  Log.e("ARIS","got really opened ?:"+ok);
+                } catch (Exception e) {
+                  Log.e("ARIS","open crash:"+e);
+                  return;
+                }
+                if (ok) {
                     Log.e("ARIS","got really opened");
                     serialPort.setBaudRate(9600);
                     serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
