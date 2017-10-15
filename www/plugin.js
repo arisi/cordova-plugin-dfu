@@ -7,6 +7,9 @@ var cordovaPluginDfu = {
   massErase: function(cb) {
     exec(cb, null, PLUGIN_NAME, 'massErase', []);
   },
+  writeSerial: function(buf,cb) {
+    exec(cb, null, PLUGIN_NAME, 'writeSerial', [buf]);
+  },
   readBytes: function(startAddr,bytes,cb) {
     exec(cb, null, PLUGIN_NAME, 'readBytes', [startAddr,bytes]);
   },

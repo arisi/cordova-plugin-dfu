@@ -175,6 +175,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
+    } else if (action.equals("writeSerial")) {
+      Log.e("ARI","writeSerial: "+args);
     } else if (action.equals("massErase")) {
       long ret=dfu.massErase();
       JSONObject json = new JSONObject();

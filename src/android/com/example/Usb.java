@@ -221,6 +221,11 @@ public class Usb {
         return isReleased;
     }
 
+    public void writeSerial(byte[] data) {
+        if (serialPort != null)
+            serialPort.write(data);
+    }
+
     private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() {
         @Override
         public void onReceivedData(byte[] arg0) {
