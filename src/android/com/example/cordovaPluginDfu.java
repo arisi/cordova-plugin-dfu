@@ -179,7 +179,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
       JSONObject json = args.getJSONObject(0);
       Log.e("ARI","writeZerial: "+args);
       Log.e("ARI","writeZerial:: "+json);
-      Log.e("ARI","writeZerial::: "+json.getJSONObject("buf"));
+      JSONObject buf = (json.has("buf"))?json.getJSONObject("buf"):null;
+      Log.e("ARI","writeZerial::: "+buf);
+      Log.e("ARI","writeZerial. ");
       /*byte[] bArr = new byte[.length()];
       for (int i = 0; i < entries.length(); i++) {
         bArr[i] = (byte) entries.getInt(i);
