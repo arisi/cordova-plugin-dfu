@@ -213,8 +213,13 @@ public class Usb {
         public void onReceivedData(byte[] arg0) {
             try {
                 String data = new String(arg0, "UTF-8");
-                byte[] b = data.getBytes();
-                Log.e("ARIS","got data: "+b);
+                byte[] bytes = data.getBytes();
+                String s="";
+                for (int i=0;i<bytes.length;i++) {
+                  s=s+String.format("%02X ", bytes[i]);
+                }
+                Log.e("ARIS","got data: "+s);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
