@@ -176,8 +176,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
     } else if (action.equals("writeSerial")) {
-      Log.e("ARI","writeSerial: "+args);
-      Log.e("ARI","writeSerial:: "+args.getJSONObject(0));
+      Log.e("ARI","writeZerial: "+args);
+      Log.e("ARI","writeZerial:: "+args.getJSONObject(0));
       /*byte[] bArr = new byte[.length()];
       for (int i = 0; i < entries.length(); i++) {
         bArr[i] = (byte) entries.getInt(i);
