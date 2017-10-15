@@ -213,7 +213,7 @@ public class Usb {
         public void onReceivedData(byte[] arg0) {
             try {
                 String data = new String(arg0, "UTF-8");
-                Lof.e("ARIS","got data: '"+data+"'")
+                Lof.e("ARIS","got data: '"+data+"'");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
