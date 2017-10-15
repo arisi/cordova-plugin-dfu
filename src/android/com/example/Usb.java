@@ -105,7 +105,7 @@ public class Usb {
                               Log.e("ARIS","found device SERIAL");
                               setDevices(device);
                               if (mOnUsbChangeListeners != null) {
-                                  mOnUsbChangeListeners.onUsbConnected();
+                                  mOnUsbChangeListeners.onUsbConnecteds();
                               }
 
                             } else {
