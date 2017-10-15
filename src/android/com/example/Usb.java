@@ -224,7 +224,7 @@ public class Usb {
     public void writeSerial(byte[] data) {
       if (serialPort != null) {
         serialPort.write(data);
-        Log.e("ARIS","wrote serial.")
+        Log.e("ARIS","wrote serial.");
       }
     }
 
