@@ -96,7 +96,7 @@ public class Usb {
                     Log.e(TAG, "attached ");
 
                     //request permission for just attached USB Device if it matches the VID/PID
-                    //requestPermission(mContext, USB_VENDOR_ID, USB_PRODUCT_ID);
+                    requestPermission(mContext, USB_VENDOR_ID, USB_PRODUCT_ID);
                     Log.e(TAG, "attached and req perm maybe ;)");
                 }
             } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
@@ -126,6 +126,9 @@ public class Usb {
 
     public void requestPermission(Context context, int vendorId, int productId) {
         // Setup Pending Intent
+        Log.e("ARI9","reqPerm suppressed");
+        return;
+        
         Log.e("ARI9","reqPerm");
         PendingIntent permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(Usb.ACTION_USB_PERMISSION), 0);
         Log.e("ARI9","reqPerm2: "+permissionIntent);
