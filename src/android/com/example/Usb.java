@@ -51,9 +51,8 @@ public class Usb {
     private UsbInterface mInterface;
     private int mDeviceVersion;
 
-    private UsbDevice sDevice;
-    private UsbDeviceConnection sConnection;
     private UsbSerialDevice serialPort;
+    private boolean serialPortConnected;
 
     /* USB DFU ID's (may differ by device) */
     public final static int USB_VENDOR_ID = 1155;   // VID while in DFU mode 0x0483
@@ -97,6 +96,7 @@ public class Usb {
                             Log.e("ARIS","found device "+deviceVID+":"+devicePID);
                             if (USB_VENDOR_ID2==deviceVID && USB_PRODUCT_ID2==devicePID) {
                               Log.e("ARIS","found device SERIAL");
+                              setDevices(device);
 
                             } else {
                               Log.e("ARIS","found device DFU");
@@ -122,9 +122,16 @@ public class Usb {
             } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
                 synchronized (this) {
                     Log.e(TAG, "detached ");
-                    UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                    if (mDevice != null && mDevice.equals(device)) {
-                        release();
+                    if (serialPortConnected) {
+                      Log.e(TAG, "detached serial");
+                      serialPortConnected = false;
+                      serialPort.close();
+                    } else {
+                      Log.e(TAG, "detached dfu");
+                      UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+                      if (mDevice != null && mDevice.equals(device)) {
+                          release();
+                      }
                     }
                 }
             }
@@ -137,6 +144,7 @@ public class Usb {
 
     public Usb(Context context) {
         mContext = context;
+        serialPortConnected = false;
         Log.e("ARI3","ouheee");
     }
 
@@ -200,6 +208,13 @@ public class Usb {
         return isReleased;
     }
 
+    public void setDevices(UsbDevice device) {
+        mDevice = device;
+        if (device != null) {
+            UsbDeviceConnection connection = mUsbManager.openDevice(device);
+            serialPortConnected = true;
+          }
+    }
     public void setDevice(UsbDevice device) {
         mDevice = device;
 
