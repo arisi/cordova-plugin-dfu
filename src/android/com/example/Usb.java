@@ -67,7 +67,7 @@ public class Usb {
         void onUsbConnected();
     }
     public interface OnUsbChangeListeners {
-        void onUsbConnecteds(String);
+        void onUsbConnecteds(String dada);
     }
 
     public void setOnUsbChangeListener(OnUsbChangeListener l) {
