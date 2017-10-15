@@ -89,7 +89,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       }
     });
     usb.setOnUsbChangeListeners(new Usb.OnUsbChangeListeners() {
-      public void onUsbConnecteds(String dada) {
+      public void onUsbConnecteds(String dada,byte[] bytes) {
         if (dada=="connected") {
           JSONObject deviceInfo = usb.getDeviceInfo(usb.getUsbDevice());
           try {
@@ -106,6 +106,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
           try {
             json.put("type","serial");
             json.put("dada",dada);
+            json.put("bytes",bytes);
           } catch (Exception e) {
             Log.e("ARI","duh");
           }

@@ -67,7 +67,7 @@ public class Usb {
         void onUsbConnected();
     }
     public interface OnUsbChangeListeners {
-        void onUsbConnecteds(String dada);
+        void onUsbConnecteds(String dada,byte[] bytes);
     }
 
     public void setOnUsbChangeListener(OnUsbChangeListener l) {
@@ -105,7 +105,7 @@ public class Usb {
                               Log.e("ARIS","found device SERIAL");
                               setDevices(device);
                               if (mOnUsbChangeListeners != null) {
-                                  mOnUsbChangeListeners.onUsbConnecteds("connected");
+                                  mOnUsbChangeListeners.onUsbConnecteds("connected",null);
                               }
 
                             } else {
@@ -233,7 +233,7 @@ public class Usb {
                 }
                 Log.e("ARIS","got data: "+s);
                 if (mOnUsbChangeListeners != null) {
-                    mOnUsbChangeListeners.onUsbConnecteds("data");
+                    mOnUsbChangeListeners.onUsbConnecteds("data",bytes);
                 }
 
 
