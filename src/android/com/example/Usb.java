@@ -128,7 +128,7 @@ public class Usb {
         // Setup Pending Intent
         Log.e("ARI9","reqPerm suppressed");
         return;
-        
+        /*
         Log.e("ARI9","reqPerm");
         PendingIntent permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(Usb.ACTION_USB_PERMISSION), 0);
         Log.e("ARI9","reqPerm2: "+permissionIntent);
@@ -144,6 +144,7 @@ public class Usb {
           Log.e("ARI9","not for us !");
 
         }
+        */
     }
 
     private UsbDevice getUsbDevice(int vendorId, int productId) {
