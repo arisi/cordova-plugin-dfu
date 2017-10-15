@@ -33,6 +33,12 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+
+import com.felhr.usbserial.CDCSerialDevice;
+import com.felhr.usbserial.UsbSerialDevice;
+import com.felhr.usbserial.UsbSerialInterface;
+
+
 public class Usb {
 
     final static String TAG = "ARI2";
@@ -44,6 +50,10 @@ public class Usb {
     private UsbDeviceConnection mConnection;
     private UsbInterface mInterface;
     private int mDeviceVersion;
+
+    private UsbDevice sDevice;
+    private UsbDeviceConnection sConnection;
+    private UsbSerialDevice serialPort;
 
     /* USB DFU ID's (may differ by device) */
     public final static int USB_VENDOR_ID = 1155;   // VID while in DFU mode 0x0483
@@ -82,6 +92,9 @@ public class Usb {
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         if (device != null) {
                             //call method to set up device communication
+                            int deviceVID = device.getVendorId();
+                            int devicePID = device.getProductId();
+                            Log.e("ARIS","found device "+deviceVID+":"+devicePID);
                             setDevice(device);
 
 
