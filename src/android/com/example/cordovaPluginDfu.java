@@ -31,6 +31,12 @@ import java.util.TimerTask;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Date;
+
+
+import com.felhr.usbserial.CDCSerialDevice;
+import com.felhr.usbserial.UsbSerialDevice;
+import com.felhr.usbserial.UsbSerialInterface;
+
 //import org.apache.commons.codec.binary.Base64;
 
 public class cordovaPluginDfu extends CordovaPlugin {
