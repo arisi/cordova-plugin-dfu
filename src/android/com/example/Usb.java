@@ -229,7 +229,7 @@ public class Usb {
             if (serialPort != null) {
                 Log.e("ARIS","got opened::not null:: '"+serialPort);
                 try {
-                  Log.e("ARIS","got opened:: real open... '";
+                  Log.e("ARIS","got opened:: real open... '");
                   boolean ok=serialPort.open();
                   Log.e("ARIS","got really opened ?:"+ok);
                   if (ok) {
