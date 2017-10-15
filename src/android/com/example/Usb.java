@@ -230,36 +230,37 @@ public class Usb {
                 try {
                   boolean ok=serialPort.open();
                   Log.e("ARIS","got really opened ?:"+ok);
+                  if (ok) {
+                      Log.e("ARIS","got really opened");
+                      serialPort.setBaudRate(9600);
+                      serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
+                      serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
+                      serialPort.setParity(UsbSerialInterface.PARITY_NONE);
+                      serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
+                      //serialPort.read(mCallback);
+                      Log.e("ARIS","got really conf");
+
+                      // Everything went as expected. Send an intent to MainActivity
+                      //Intent intent = new Intent(ACTION_USB_READY);
+                      //context.sendBroadcast(intent);
+                  } else {
+                      Log.e("ARIS","got not open '");
+                      // Serial port could not be opened, maybe an I/O error or if CDC driver was chosen, it does not really fit
+                      // Send an Intent to Main Activity
+                      if (serialPort instanceof CDCSerialDevice) {
+                          Log.e("ARIS","got not open 2'");
+                          //Intent intent = new Intent(ACTION_CDC_DRIVER_NOT_WORKING);
+                          //context.sendBroadcast(intent);
+                      } else {
+                          Log.e("ARIS","got not open 3'");
+                          //Intent intent = new Intent(ACTION_USB_DEVICE_NOT_WORKING);
+                          //context.sendBroadcast(intent);
+                      }
+                  }
+                  
                 } catch (Exception e) {
                   Log.e("ARIS","open crash:"+e);
                   return;
-                }
-                if (ok) {
-                    Log.e("ARIS","got really opened");
-                    serialPort.setBaudRate(9600);
-                    serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
-                    serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
-                    serialPort.setParity(UsbSerialInterface.PARITY_NONE);
-                    serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
-                    //serialPort.read(mCallback);
-                    Log.e("ARIS","got really conf");
-
-                    // Everything went as expected. Send an intent to MainActivity
-                    //Intent intent = new Intent(ACTION_USB_READY);
-                    //context.sendBroadcast(intent);
-                } else {
-                    Log.e("ARIS","got not open '");
-                    // Serial port could not be opened, maybe an I/O error or if CDC driver was chosen, it does not really fit
-                    // Send an Intent to Main Activity
-                    if (serialPort instanceof CDCSerialDevice) {
-                        Log.e("ARIS","got not open 2'");
-                        //Intent intent = new Intent(ACTION_CDC_DRIVER_NOT_WORKING);
-                        //context.sendBroadcast(intent);
-                    } else {
-                        Log.e("ARIS","got not open 3'");
-                        //Intent intent = new Intent(ACTION_USB_DEVICE_NOT_WORKING);
-                        //context.sendBroadcast(intent);
-                    }
                 }
             } else {
                 Log.e("ARIS","got not open no driver'");
