@@ -66,11 +66,14 @@ public class Usb {
     public interface OnUsbChangeListener {
         void onUsbConnected();
     }
+    public interface OnUsbChangeListeners {
+        void onUsbConnecteds();
+    }
 
     public void setOnUsbChangeListener(OnUsbChangeListener l) {
         mOnUsbChangeListener = l;
     }
-    public void setOnUsbChangeListeners(OnUsbChangeListener l) {
+    public void setOnUsbChangeListeners(OnUsbChangeListeners l) {
         mOnUsbChangeListeners = l;
     }
 
