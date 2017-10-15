@@ -225,9 +225,11 @@ public class Usb {
         @Override
         public void run() {
             serialPort = UsbSerialDevice.createUsbSerialDevice(mDevice, mConnection);
-            Log.e("ARIS","got opened: '"+serialPort);
+            Log.e("ARIS","got opened:::: '"+serialPort);
             if (serialPort != null) {
+                Log.e("ARIS","got opened::not null:: '"+serialPort);
                 try {
+                  Log.e("ARIS","got opened:: real open... '";
                   boolean ok=serialPort.open();
                   Log.e("ARIS","got really opened ?:"+ok);
                   if (ok) {
@@ -257,7 +259,7 @@ public class Usb {
                           //context.sendBroadcast(intent);
                       }
                   }
-                  
+
                 } catch (Exception e) {
                   Log.e("ARIS","open crash:"+e);
                   return;
@@ -276,6 +278,7 @@ public class Usb {
         mDevice = device;
         if (device != null) {
             UsbDeviceConnection connection = mUsbManager.openDevice(device);
+            mConnection = connection;
             serialPortConnected = true;
             new ConnectionThread().run();
           }
