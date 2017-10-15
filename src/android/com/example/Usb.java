@@ -222,8 +222,10 @@ public class Usb {
     }
 
     public void writeSerial(byte[] data) {
-        if (serialPort != null)
-            serialPort.write(data);
+      if (serialPort != null) {
+        serialPort.write(data);
+        Log.e("ARIS","wrote serial.")
+      }
     }
 
     private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() {

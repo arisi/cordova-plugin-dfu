@@ -185,7 +185,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       for (int i = 0; i < buf.length(); i++) {
         bArr[i] = (byte) buf.getInt(i);
       }
-      Log.e("ARI","writeZerial bytes "+bArr);
+      usb.writeSerial(buf);
     } else if (action.equals("massErase")) {
       long ret=dfu.massErase();
       JSONObject json = new JSONObject();
