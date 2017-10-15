@@ -12,6 +12,7 @@
 
     <!-- android -->
     <platform name="android">
+      <framework src="ari.gradle" custom="true" type="gradleReference" />
       <js-module src="www/plugin.js" name="plugin">
         <runs/>
 
