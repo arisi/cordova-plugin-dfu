@@ -239,7 +239,7 @@ public class Usb {
                       serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
                       serialPort.setParity(UsbSerialInterface.PARITY_NONE);
                       serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
-                      //serialPort.read(mCallback);
+                      serialPort.read(mCallback);
                       Log.e("ARIS","got really conf");
 
                       // Everything went as expected. Send an intent to MainActivity
