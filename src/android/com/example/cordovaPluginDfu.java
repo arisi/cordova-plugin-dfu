@@ -104,8 +104,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
         } else {
           JSONObject json = new JSONObject();
           try {
-            deviceInfo.put("type","serial");
-            deviceInfo.put("dada",dada);
+            json.put("type","serial");
+            json.put("dada",dada);
           } catch (Exception e) {
             Log.e("ARI","duh");
           }
