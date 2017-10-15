@@ -95,12 +95,17 @@ public class Usb {
                             int deviceVID = device.getVendorId();
                             int devicePID = device.getProductId();
                             Log.e("ARIS","found device "+deviceVID+":"+devicePID);
-                            setDevice(device);
+                            if (USB_VENDOR_ID2==deviceVID && USB_PRODUCT_ID2==devicePID) {
+                              Log.e("ARIS","found device SERIAL");
 
-
-                            if (mOnUsbChangeListener != null) {
-                                mOnUsbChangeListener.onUsbConnected();
+                            } else {
+                              Log.e("ARIS","found device DFU");
+                              setDevice(device);
+                              if (mOnUsbChangeListener != null) {
+                                  mOnUsbChangeListener.onUsbConnected();
+                              }
                             }
+
                         }
                     } else {
                         Log.e(TAG, "permission denied for device " + device);
@@ -158,7 +163,7 @@ public class Usb {
 
           if (device != null) {
               Log.e("ARI9","reqPerm4s IT IS SERIAL");
-              //mUsbManager.requestPermission(device, permissionIntent);
+              mUsbManager.requestPermission(device, permissionIntent);
               //Log.e("ARI9","reqPerm5");
           } else {
             Log.e("ARI9","not for us definately!");
