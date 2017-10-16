@@ -728,7 +728,7 @@ public class Dfu {
         DfuStatus dfuStatus = new DfuStatus();
         Log.e("ARIF","writeBlock: "+address);
         Log.e("ARIF","writeBlock:: "+blockNumber);
-        Log.e("ARIF","writeBlock::: "+block);
+        Log.e("ARIF","writeBlock::: "+block); 
         do {
             clearStatus();
             getStatus(dfuStatus);
