@@ -723,7 +723,7 @@ public class Dfu {
     }
 
 
-    private void writeBlock(int address, byte[] block, int blockNumber) throws Exception {
+    public void writeBlock(int address, byte[] block, int blockNumber) throws Exception {
 
         DfuStatus dfuStatus = new DfuStatus();
 
