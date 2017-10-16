@@ -216,8 +216,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
 
           try {
             byte[] bblock = new byte[bytes.length()];
-            for (int i = 0; i < bytes.length(); i++) {
-              bblock[i] = (byte) bytes.getInt(i);
+            for (int i2 = 0; i2 < bytes.length(); i2++) {
+              bblock[i2] = (byte) bytes.getInt(i2);
             }
             Log.e("ARIDD","now writin...");
             dfu.writeBlock(addr, bblock,0);
