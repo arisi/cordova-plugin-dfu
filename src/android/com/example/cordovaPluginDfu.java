@@ -215,12 +215,12 @@ public class cordovaPluginDfu extends CordovaPlugin {
           Log.e("ARIDD","now block data final:"+addr+" :: "+bytes);
 
           try {
-            byte[] block = new byte[bytes.length()];
+            byte[] bblock = new byte[bytes.length()];
             for (int i = 0; i < bytes.length(); i++) {
-              block[i] = (byte) bytes.getInt(i);
+              bblock[i] = (byte) bytes.getInt(i);
             }
             Log.e("ARIDD","now writin...");
-            dfu.writeBlock(addr, block,0);
+            dfu.writeBlock(addr, bblock,0);
             Log.e("ARIDD","now wrote..");
           }  catch (Exception e) {
             Log.e("ARIDD","write errs"+e);
