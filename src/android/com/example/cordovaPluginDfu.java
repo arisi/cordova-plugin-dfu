@@ -186,6 +186,16 @@ public class cordovaPluginDfu extends CordovaPlugin {
       if (verb.equals("massErase")) {
         long tim=dfu.massErase();
         ret.put("eraseTime", tim);
+      } else if (verb.equals("readBytes")) {
+        Log.e("ARI","readBytes. "+args);
+        int start=json.getInt("start")
+        Log.e("ARI","readBytes.. "+start);
+        //int start=Integer.parseInt(args.getString(0));
+        //int bytes=Integer.parseInt(args.getString(1));
+        //byte[] ret = dfu.readBytes( start,bytes ) ;
+
+
+
       } else {
         ret.put("error", "No such verb '"+verb+"'.'");
       }
