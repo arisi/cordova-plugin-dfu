@@ -31,6 +31,7 @@ import java.util.TimerTask;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 
 
 import com.felhr.usbserial.CDCSerialDevice;
