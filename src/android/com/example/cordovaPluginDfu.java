@@ -175,6 +175,13 @@ public class cordovaPluginDfu extends CordovaPlugin {
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
+    } else if (action.equals("doDFU")) {
+      String action = args.getString(0)
+      JSONObject jsonn = args.getJSONObject(1);
+      JSONObject json = (jsonn.has("json"))?json.getJSONObject("json"):null;
+      Log.e("ARI","doDFU: "+args);
+      Log.e("ARI","doDFU: "+action+" : "+json);
+      Log.e("ARI","doDFU:: "+action+" : "+jsonn);
     } else if (action.equals("writeSerial")) {
       JSONObject json = args.getJSONObject(0);
       Log.e("ARI","writeZerial: "+args);

@@ -10,6 +10,9 @@ var cordovaPluginDfu = {
   writeSerial: function(buf,cb) {
     exec(cb, null, PLUGIN_NAME, 'writeSerial', [{"buf":buf}]);
   },
+  doDFU: function(action,json,cb) {
+    exec(cb, null, PLUGIN_NAME, 'doDFU', [action,{"json":json}]);
+  },
   readBytes: function(startAddr,bytes,cb) {
     exec(cb, null, PLUGIN_NAME, 'readBytes', [startAddr,bytes]);
   },
