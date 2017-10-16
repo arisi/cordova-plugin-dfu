@@ -726,7 +726,9 @@ public class Dfu {
     public void writeBlock(int address, byte[] block, int blockNumber) throws Exception {
 
         DfuStatus dfuStatus = new DfuStatus();
-
+        Log.e("ARIF","writeBlock: "+address);
+        Log.e("ARIF","writeBlock:: "+blockNumber);
+        Log.e("ARIF","writeBlock::: "+block);
         do {
             clearStatus();
             getStatus(dfuStatus);
@@ -737,6 +739,7 @@ public class Dfu {
             getStatus(dfuStatus);
             getStatus(dfuStatus);
             if (dfuStatus.bState == STATE_DFU_ERROR) {
+                Log.e("ARIF","writeBlock::: bad addr");
                 throw new Exception("Start address not supported");
             }
         }
@@ -749,17 +752,21 @@ public class Dfu {
         download(block, (blockNumber + 2));
         getStatus(dfuStatus);   // to execute
         if (dfuStatus.bState != STATE_DFU_DOWNLOAD_BUSY) {
-            throw new Exception("error when downloading, was not busy ");
+          Log.e("ARIF","writeBlock::: bad addr2");
+          throw new Exception("error when downloading, was not busy ");
         }
         getStatus(dfuStatus);   // to verify action
         if (dfuStatus.bState == STATE_DFU_ERROR) {
-            throw new Exception("error when downloading, did not perform action");
+          Log.e("ARIF","writeBlock::: bad addr3");
+          throw new Exception("error when downloading, did not perform action");
         }
 
         while (dfuStatus.bState != STATE_DFU_IDLE) {
-            clearStatus();
-            getStatus(dfuStatus);
+          clearStatus();
+          getStatus(dfuStatus);
         }
+        Log.e("ARIF","writeBlock: done");
+
     }
 
     private void detach(int Address) throws Exception {
