@@ -176,7 +176,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
       final PluginResult result = new PluginResult(PluginResult.Status.OK, json);
       callbackContext.sendPluginResult(result);
     } else if (action.equals("doDFU")) {
-      String action = args.getString(0)
+      String action = args.getString(0);
       JSONObject jsonn = args.getJSONObject(1);
       JSONObject json = (jsonn.has("json"))?json.getJSONObject("json"):null;
       Log.e("ARI","doDFU: "+args);
