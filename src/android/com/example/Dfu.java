@@ -341,10 +341,10 @@ public class Dfu {
     public void leaveDfuMode() {
         try {
             detach(mInternalFlashStartAddress);
-            Log.e("ARIXXZ","Dfu leafe ok")
+            Log.e("ARIXXZ","Dfu leafe ok");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("ARIXXZ","Dfu leafe vails:"+e)
+            Log.e("ARIXXZ","Dfu leafe vails:"+e);
         }
     }
 
