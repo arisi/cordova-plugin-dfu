@@ -769,31 +769,38 @@ public class Dfu {
 
     }
 
-    private void detach(int Address) throws Exception {
+    private void detach(int Address)  {
 
         DfuStatus dfuStatus = new DfuStatus();
         Log.e("ARIDET","det :"+Address);
-        getStatus(dfuStatus);
-        while (dfuStatus.bState != STATE_DFU_IDLE) {
-            clearStatus();
-            getStatus(dfuStatus);
+        try {
+          getStatus(dfuStatus);
+          while (dfuStatus.bState != STATE_DFU_IDLE) {
+              clearStatus();
+              getStatus(dfuStatus);
+          }
+        } catch (Exception e) {
+          Log.e("ARIDET","det errs1:"+e);
         }
-        // Set the command pointer to the new application base address
-        setAddressPointer(Address);
-        getStatus(dfuStatus);
-        while (dfuStatus.bState != STATE_DFU_IDLE) {
-            clearStatus();
-            getStatus(dfuStatus);
+          // Set the command pointer to the new application base address
+        try {
+          setAddressPointer(Address);
+          getStatus(dfuStatus);
+          while (dfuStatus.bState != STATE_DFU_IDLE) {
+              clearStatus();
+              getStatus(dfuStatus);
+          }
+          // Issue the DFU detach command
+          leaveDfu();
+        } catch (Exception e) {
+          Log.e("ARIDET","det errs2:"+e);
         }
-        // Issue the DFU detach command
-        leaveDfu();
         try {
             getStatus(dfuStatus);
             clearStatus();
             getStatus(dfuStatus);
         } catch (Exception e) {
-          Log.e("ARIDET","det errs:"+e);
-            // if caught, ignore since device might have disconnected already
+          Log.e("ARIDET","det errs3:"+e);
         }
     }
 
@@ -869,7 +876,7 @@ public class Dfu {
     }
 
     private void leaveDfu() throws Exception {
-        download(null);
+        download_null();
     }
 
     private void getStatus(DfuStatus status) throws Exception {
@@ -896,6 +903,13 @@ public class Dfu {
     // use for commands
     private void download(byte[] data) throws Exception {
         int len = usb.controlTransfer(DFU_RequestType, DFU_DNLOAD, 0, 0, data, data.length, 50);
+        if (len < 0) {
+            throw new Exception("USB Failed during command download");
+        }
+    }
+
+    private void download_null() throws Exception {
+        int len = usb.controlTransfer(DFU_RequestType, DFU_DNLOAD, 0, 0, null, 0, 50);
         if (len < 0) {
             throw new Exception("USB Failed during command download");
         }
