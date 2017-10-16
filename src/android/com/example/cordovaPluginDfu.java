@@ -178,7 +178,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
     } else if (action.equals("doDFU")) {
       String verb = args.getString(0);
       JSONObject jsonn = args.getJSONObject(1);
-      JSONObject json = (jsonn.has("json"))?json.getJSONObject("json"):null;
+      JSONObject json = (jsonn.has("json"))?jsonn.getJSONObject("json"):null;
       Log.e("ARI","doDFU: "+args);
       Log.e("ARI","doDFU: "+verb+" : "+json);
       Log.e("ARI","doDFU:: "+verb+" : "+jsonn);
