@@ -189,7 +189,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int start=json.getInt("start");
         int bytes=json.getInt("bytes");
         try {
-          byte[] barray = dfu.readBytes( start,bytes ) ;
+          Integer[] barray = dfu.readBytes( start,bytes ) ;
           ret.put("start",start);
           ret.put("data",new JSONArray(barray));
         }  catch (Exception e) {
@@ -197,6 +197,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         }
       } else if (verb.equals("writeBlock")) {
         int start=json.getInt("start");
+        Log.e("ARIDD","now start"+args);
         JSONArray bytes=json.getJSONArray("data");
         try {
           byte[] block = new byte[bytes.length()];
@@ -204,7 +205,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
             block[i] = (byte) bytes.getInt(i);
           }
           Log.e("ARIDD","now writin...");
-          dfu.writeBlock(start, block, 0);
+          dfu.writeBlockk(start, block);
           Log.e("ARIDD","now wrote..");
         }  catch (Exception e) {
           Log.e("ARIDD","write errs"+e);
