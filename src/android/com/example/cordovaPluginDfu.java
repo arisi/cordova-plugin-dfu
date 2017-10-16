@@ -202,14 +202,10 @@ public class cordovaPluginDfu extends CordovaPlugin {
         }
 
       } else if (verb.equals("writeBlocks")) {
-        Log.e("ARIDD","now start writeBlokcs:"+args);
         JSONArray blocks=json.getJSONArray("blocks");
 
-        Log.e("ARIDD","now blocks "+blocks);
         for (int i = 0; i < blocks.length(); i++) {
-          Log.e("ARIDD","now block "+i);
           JSONObject block =blocks.getJSONObject(i);
-          Log.e("ARIDD","now block data:"+block);
           Integer addr = block.getInt("addr");
           JSONArray bytes = block.getJSONArray("data");
           Log.e("ARIDD","now block data final:"+addr+" :: "+bytes);
@@ -219,12 +215,10 @@ public class cordovaPluginDfu extends CordovaPlugin {
             for (int i2 = 0; i2 < bytes.length(); i2++) {
               bblock[i2] = (byte) bytes.getInt(i2);
             }
-            Log.e("ARIDD","now writin...");
             dfu.writeBlock(addr, bblock,0);
-            Log.e("ARIDD","now wrote..");
           }  catch (Exception e) {
             Log.e("ARIDD","write errs"+e);
-            ret.put("error", "Error:"+e);
+            //ret.put("error", "Error:"+e);
           }
 
         }

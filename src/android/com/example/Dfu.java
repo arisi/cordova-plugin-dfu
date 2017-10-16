@@ -727,9 +727,7 @@ public class Dfu {
     public void writeBlock(int address, byte[] block, int blockNumber) throws Exception {
 
         DfuStatus dfuStatus = new DfuStatus();
-        Log.e("ARIF","writeBlock: "+address);
-        Log.e("ARIF","writeBlock:: "+blockNumber);
-        Log.e("ARIF","writeBlock::: "+block);
+        Log.e("ARIF","writeBlock: "+String.format("%08X", address)+" len="+(block.lenght()));
         do {
             clearStatus();
             getStatus(dfuStatus);
