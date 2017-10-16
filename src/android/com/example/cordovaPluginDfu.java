@@ -191,8 +191,12 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int start=json.getInt("start");
         int bytes=json.getInt("bytes");
         Log.e("ARI","readBytes.. "+start);
-        byte[] barray = dfu.readBytes( start,bytes ) ;
-        ret.put("value",new JSONArray(barray));
+        try {
+          byte[] barray = dfu.readBytes( start,bytes ) ;
+          ret.put("value",new JSONArray(barray));
+        }  catch (Exception e) {
+          ret.put("error", "Error:"+e);
+        }
       } else {
         ret.put("error", "No such verb '"+verb+"'.'");
       }
