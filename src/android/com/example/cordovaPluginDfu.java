@@ -191,10 +191,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int bytes=json.getInt("bytes");
         try {
           byte[] barray = dfu.readBytes( start,bytes ) ;
+          Integer[] iarray=new Integer[bytes];
           for (int i = 0; i < barray.length; i++)
-            barray[i]=barray[i] & 0xFF;
+            iarray[i]=barray[i] & 0xFF;
           ret.put("start",start);
-          ret.put("data",new JSONArray(barray));
+          ret.put("data",new JSONArray(iarray));
         }  catch (Exception e) {
           ret.put("error", "Error:"+e);
         }
