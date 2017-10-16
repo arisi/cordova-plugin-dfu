@@ -188,7 +188,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         ret.put("eraseTime", tim);
 
       } else if (verb.equals("leaveDfu")) {
-        long tim=dfu.leaveDfuMode();
+        dfu.leaveDfuMode();
 
       } else if (verb.equals("readBytes")) {
         int start=json.getInt("start");
