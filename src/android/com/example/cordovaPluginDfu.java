@@ -188,7 +188,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         ret.put("eraseTime", tim);
       } else if (verb.equals("readBytes")) {
         Log.e("ARI","readBytes. "+args);
-        int start=json.getInt("start")
+        int start=json.getInt("start");
         Log.e("ARI","readBytes.. "+start);
         //int start=Integer.parseInt(args.getString(0));
         //int bytes=Integer.parseInt(args.getString(1));
