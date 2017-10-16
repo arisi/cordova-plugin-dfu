@@ -772,6 +772,7 @@ public class Dfu {
     private void detach(int Address) throws Exception {
 
         DfuStatus dfuStatus = new DfuStatus();
+        Log.e("ARIDET","det :"+Address);
         getStatus(dfuStatus);
         while (dfuStatus.bState != STATE_DFU_IDLE) {
             clearStatus();
@@ -791,6 +792,7 @@ public class Dfu {
             clearStatus();
             getStatus(dfuStatus);
         } catch (Exception e) {
+          Log.e("ARIDET","det errs:"+e);
             // if caught, ignore since device might have disconnected already
         }
     }
