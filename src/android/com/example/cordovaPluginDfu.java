@@ -182,11 +182,12 @@ public class cordovaPluginDfu extends CordovaPlugin {
       Log.e("ARI","doDFU: "+args);
       Log.e("ARI","doDFU: "+verb+" : "+json);
       JSONObject ret = new JSONObject();
+      ret.put("verb", verb);
       if (verb=="massErase") {
         long tim=dfu.massErase();
-        json.put("eraseTime", tim);
+        ret.put("eraseTime", tim);
       } else {
-        json.put("error", "No such verb "+verb);
+        ret.put("error", "No such verb "+verb);
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, ret);
       callbackContext.sendPluginResult(result);
