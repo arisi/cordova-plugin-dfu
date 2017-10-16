@@ -460,7 +460,7 @@ public class Dfu {
     }
 
     public byte[] readBytes(int startAddress,int bytes) throws Exception {
-      byte[] block = new byte[32];
+      byte[] block = new byte[bytes];
       if (!isUsbConnected()) return null;
 
       DfuStatus dfuStatus = new DfuStatus();
