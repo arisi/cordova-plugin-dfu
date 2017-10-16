@@ -179,7 +179,6 @@ public class cordovaPluginDfu extends CordovaPlugin {
       String verb = args.getString(0);
       JSONObject jsonn = args.getJSONObject(1);
       JSONObject json = (jsonn.has("json"))?jsonn.getJSONObject("json"):null;
-      Log.e("ARI","doDFU: "+args);
       Log.e("ARI","doDFU: '"+verb+"' : "+json);
       JSONObject ret = new JSONObject();
       ret.put("verb", verb);
@@ -187,13 +186,24 @@ public class cordovaPluginDfu extends CordovaPlugin {
         long tim=dfu.massErase();
         ret.put("eraseTime", tim);
       } else if (verb.equals("readBytes")) {
-        Log.e("ARI","readBytes. "+args);
         int start=json.getInt("start");
         int bytes=json.getInt("bytes");
-        Log.e("ARI","readBytes.. "+start);
         try {
           byte[] barray = dfu.readBytes( start,bytes ) ;
-          ret.put("value",new JSONArray(barray));
+          ret.put("start",start);
+          ret.put("data",new JSONArray(barray));
+        }  catch (Exception e) {
+          ret.put("error", "Error:"+e);
+        }
+      } else if (verb.equals("writeBlock")) {
+        int start=json.getInt("start");
+        int bytes=json.getJSONArray("data");
+        try {
+          byte[] block = new byte[bytes.length()];
+          for (int i = 0; i < bytes.length(); i++) {
+            block[i] = (byte) bytes.getInt(i);
+          }
+          dfu.writeBlock(staRET, block, 0)
         }  catch (Exception e) {
           ret.put("error", "Error:"+e);
         }

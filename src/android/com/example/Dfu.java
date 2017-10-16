@@ -464,13 +464,11 @@ public class Dfu {
       if (!isUsbConnected()) return null;
 
       DfuStatus dfuStatus = new DfuStatus();
-      Log.e("ARIR","read "+startAddress+","+bytes);
       try {
         do {
             clearStatus();
             getStatus(dfuStatus);
         } while (dfuStatus.bState != STATE_DFU_IDLE);
-        Log.e("ARIR","addrp?");
 
         setAddressPointer(startAddress);
         getStatus(dfuStatus);   // to execute
@@ -485,7 +483,6 @@ public class Dfu {
             getStatus(dfuStatus);
         }
         upload(block, bytes, 2);
-        Log.e("ARIR","read ok?");
         getStatus(dfuStatus);
         return block;
       } catch (Exception e) {
