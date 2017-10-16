@@ -203,11 +203,11 @@ public class cordovaPluginDfu extends CordovaPlugin {
           for (int i = 0; i < bytes.length(); i++) {
             block[i] = (byte) bytes.getInt(i);
           }
-          Log.e("ARIDD","now writin...")
+          Log.e("ARIDD","now writin...");
           dfu.writeBlock(start, block, 0);
-          Log.e("ARIDD","now wrote..")
+          Log.e("ARIDD","now wrote..");
         }  catch (Exception e) {
-          Log.e("ARIDD","write errs"+e)
+          Log.e("ARIDD","write errs"+e);
           ret.put("error", "Error:"+e);
         }
       } else {
