@@ -29,9 +29,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.util.Log;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
+//import java.util.Date;
+//import java.util.Iterator;
 
 
 import com.felhr.usbserial.CDCSerialDevice;
@@ -207,7 +207,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         JSONObject blocks=json.getJSONObject("data");
         Set<String> keys = blocks.keyset();
         Log.e("ARIDD","iterate: "+keys);
-        
+
         Log.e("ARIDD","now start "+blocks);
       } else if (verb.equals("writeBlock")) {
         int start=json.getInt("start");
