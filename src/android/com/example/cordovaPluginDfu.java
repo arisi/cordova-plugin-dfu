@@ -187,7 +187,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         ret.put("eraseTime", tim);
       } else if (verb.equals("readBytes")) {
         int start=json.getInt("start");
-        JSONArray bytes=json.getInt("bytes");
+        int bytes=json.getInt("bytes");
         try {
           byte[] barray = dfu.readBytes( start,bytes ) ;
           ret.put("start",start);
@@ -197,7 +197,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
         }
       } else if (verb.equals("writeBlock")) {
         int start=json.getInt("start");
-        int bytes=json.getJSONArray("data");
+        JSONArray bytes=json.getJSONArray("data");
         try {
           byte[] block = new byte[bytes.length()];
           for (int i = 0; i < bytes.length(); i++) {
