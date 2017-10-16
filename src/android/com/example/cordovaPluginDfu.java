@@ -203,7 +203,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
           for (int i = 0; i < bytes.length(); i++) {
             block[i] = (byte) bytes.getInt(i);
           }
-          dfu.writeBlock(staRET, block, 0)
+          dfu.writeBlock(staRET, block, 0);
         }  catch (Exception e) {
           ret.put("error", "Error:"+e);
         }
