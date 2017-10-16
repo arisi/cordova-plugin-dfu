@@ -211,8 +211,22 @@ public class cordovaPluginDfu extends CordovaPlugin {
           JSONObject block =blocks.getJSONObject(i);
           Log.e("ARIDD","now block data:"+block);
           Integer addr = block.getInt("addr");
-          JSONArray data = block.getJSONArray("data");
-          Log.e("ARIDD","now block data final:"+addr+" :: "+data);
+          JSONArray bytes = block.getJSONArray("data");
+          Log.e("ARIDD","now block data final:"+addr+" :: "+bytes);
+
+          try {
+            byte[] block = new byte[bytes.length()];
+            for (int i = 0; i < bytes.length(); i++) {
+              block[i] = (byte) bytes.getInt(i);
+            }
+            Log.e("ARIDD","now writin...");
+            dfu.writeBlock(addr, block,0);
+            Log.e("ARIDD","now wrote..");
+          }  catch (Exception e) {
+            Log.e("ARIDD","write errs"+e);
+            ret.put("error", "Error:"+e);
+          }
+
         }
       } else if (verb.equals("writeBlock")) {
         int start=json.getInt("start");
