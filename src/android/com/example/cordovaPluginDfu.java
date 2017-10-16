@@ -205,12 +205,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
         int start=json.getInt("start");
         Log.e("ARIDD","now start writeBlokcs:"+args);
         JSONObject blocks=json.getJSONObject("data");
-
-        for(Iterator iterator = blocks.keySet().iterator(); iterator.hasNext();) {
-          String key = (String) iterator.next();
-          Log.e("ARIDD","iterate: "+key);
-        }
-
+        Set<String> keys = blocks.keyset();
+        Log.e("ARIDD","iterate: "+keys);
+        
         Log.e("ARIDD","now start "+blocks);
       } else if (verb.equals("writeBlock")) {
         int start=json.getInt("start");
