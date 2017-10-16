@@ -208,6 +208,8 @@ public class cordovaPluginDfu extends CordovaPlugin {
         Log.e("ARIDD","now blocks "+blocks);
         for (int i = 0; i < blocks.length(); i++) {
           Log.e("ARIDD","now block "+i);
+          JSONObject block =blocks.getJSONObject(i);
+          Log.e("ARIDD","now block data:"+block);
           //bArr[i] = (byte) buf.getInt(i);
         }
       } else if (verb.equals("writeBlock")) {
