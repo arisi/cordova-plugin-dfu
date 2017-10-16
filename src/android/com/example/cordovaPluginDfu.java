@@ -180,14 +180,14 @@ public class cordovaPluginDfu extends CordovaPlugin {
       JSONObject jsonn = args.getJSONObject(1);
       JSONObject json = (jsonn.has("json"))?jsonn.getJSONObject("json"):null;
       Log.e("ARI","doDFU: "+args);
-      Log.e("ARI","doDFU: "+verb+" : "+json);
+      Log.e("ARI","doDFU: '"+verb+"' : "+json);
       JSONObject ret = new JSONObject();
       ret.put("verb", verb);
-      if (verb=="massErase") {
+      if (verb.equals("massErase") {
         long tim=dfu.massErase();
         ret.put("eraseTime", tim);
       } else {
-        ret.put("error", "No such verb "+verb);
+        ret.put("error", "No such verb '"+verb+"'.'");
       }
       final PluginResult result = new PluginResult(PluginResult.Status.OK, ret);
       callbackContext.sendPluginResult(result);
