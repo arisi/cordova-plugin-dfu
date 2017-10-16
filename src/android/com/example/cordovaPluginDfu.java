@@ -185,16 +185,20 @@ public class cordovaPluginDfu extends CordovaPlugin {
       if (verb.equals("massErase")) {
         long tim=dfu.massErase();
         ret.put("eraseTime", tim);
+
       } else if (verb.equals("readBytes")) {
         int start=json.getInt("start");
         int bytes=json.getInt("bytes");
         try {
-          Integer[] barray = dfu.readBytes( start,bytes ) ;
+          Byte[] barray = dfu.readBytes( start,bytes ) ;
+          for (int i = 0; i < barray.length(); i++) {
+            barray[i]=barray[i] & 0xFF
           ret.put("start",start);
           ret.put("data",new JSONArray(barray));
         }  catch (Exception e) {
           ret.put("error", "Error:"+e);
         }
+
       } else if (verb.equals("writeBlock")) {
         int start=json.getInt("start");
         Log.e("ARIDD","now start"+args);
@@ -205,7 +209,7 @@ public class cordovaPluginDfu extends CordovaPlugin {
             block[i] = (byte) bytes.getInt(i);
           }
           Log.e("ARIDD","now writin...");
-          dfu.writeBlockk(start, block);
+          dfu.writeBlock(start, block,0);
           Log.e("ARIDD","now wrote..");
         }  catch (Exception e) {
           Log.e("ARIDD","write errs"+e);

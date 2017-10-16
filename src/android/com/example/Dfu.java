@@ -723,14 +723,8 @@ public class Dfu {
     }
 
 
-    public void writeBlockk(int address, byte[] block) {
-      Log.e("ARIF","writeBlockk: "+address);
-      Log.e("ARIF","writeBlockk::: "+block);
-      writeBlock(address,block,0);
-      Log.e("ARIF","writeBlockk::: done");
-    }
-    
-    private void writeBlock(int address, byte[] block, int blockNumber) throws Exception {
+
+    public void writeBlock(int address, byte[] block, int blockNumber) throws Exception {
 
         DfuStatus dfuStatus = new DfuStatus();
         Log.e("ARIF","writeBlock: "+address);
