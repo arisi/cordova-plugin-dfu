@@ -53,9 +53,9 @@ public class cordovaPluginDfu extends CordovaPlugin {
     if (cbc != null) {
       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, msg);
       pluginResult.setKeepCallback(true);
-      Log.e("ARIMx","cb?");
+      //Log.e("ARIMx","cb?");
       cbc.sendPluginResult(pluginResult);
-      Log.e("ARIMx","cb ok");
+      //Log.e("ARIMx","cb ok");
       return true;
     } else {
       Log.e("ARIMx","NO CBC "+cbc);
@@ -256,10 +256,10 @@ public class cordovaPluginDfu extends CordovaPlugin {
       callbackContext.sendPluginResult(result);
     } else if (action.equals("writeSerial")) {
       JSONObject json = args.getJSONObject(0);
-      Log.e("ARI","writeZerial: "+args);
-      Log.e("ARI","writeZerial:: "+json);
+      //Log.e("ARI","writeZerial: "+args);
+      //Log.e("ARI","writeZerial:: "+json);
       JSONArray buf = (json.has("buf"))?json.getJSONArray("buf"):null;
-      Log.e("ARI","writeZerial::: "+buf);
+      //Log.e("ARI","writeZerial::: "+buf);
       byte[] bArr = new byte[buf.length()];
       for (int i = 0; i < buf.length(); i++) {
         bArr[i] = (byte) buf.getInt(i);

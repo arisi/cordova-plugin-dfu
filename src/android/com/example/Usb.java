@@ -247,6 +247,7 @@ public class Usb {
         @Override
         public void onReceivedData(byte[] arg0) {
             try {
+              /*
                 String data = new String(arg0, "ASCII");
                 byte[] bytes = data.getBytes();
                 Log.e("ARIS","got raw: "+bytesToHex(bytes));
@@ -255,6 +256,7 @@ public class Usb {
                   s=s+String.format("%02X ", bytes[i]);
                 }
                 Log.e("ARIS","got data: "+s);
+                */
                 if (mOnUsbChangeListeners != null) {
                     mOnUsbChangeListeners.onUsbConnecteds("data",arg0);
                 }
