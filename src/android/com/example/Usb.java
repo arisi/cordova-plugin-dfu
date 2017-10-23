@@ -238,6 +238,7 @@ public class Usb {
             try {
                 String data = new String(arg0, "UTF-8");
                 byte[] bytes = data.getBytes();
+                Log.e("ARIS","got raw: "+bytes);
                 String s="";
                 for (int i=0;i<bytes.length;i++) {
                   s=s+String.format("%02X ", bytes[i]);
